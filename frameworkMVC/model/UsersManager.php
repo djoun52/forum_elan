@@ -3,7 +3,7 @@
     
     use App\AbstractManager;
 
-    class UserManager extends AbstractManager
+    class UsersManager extends AbstractManager
     {
         private static $classname = "Model\User"; //C'est le FQCN parce que la classe est dans une string
 
@@ -13,7 +13,7 @@
 
         public function findUser($username){
             
-            $sql = "SELECT * FROM user WHERE username = :username";
+            $sql = "SELECT * FROM Users WHERE username = :username";
 
             return self::getOneOrNullResult(
                 self::select($sql, ['username' => $username], false),
@@ -22,7 +22,7 @@
         }
 
         public function addUser($username, $hash){
-            $sql = "INSERT INTO user (username, password) VALUES (:username, :password)";
+            $sql = "INSERT INTO Users (username, password) VALUES (:username, :password)";
 
             return self::create($sql, [
                     'username' => $username,
@@ -31,7 +31,7 @@
         }
 
         public function findAll(){
-            $sql = "SELECT * FROM user";
+            $sql = "SELECT * FROM Users";
 
             return self::getResults(
                 self::select($sql, null, true),
