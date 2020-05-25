@@ -1,0 +1,30 @@
+
+TEMPLATING: une vue principale (doctype head body...) unique ! => layout
+- menu
+- footer
+- canevas de base de toutes les pages
+Toutes les autres vues vont venir s'insérer dans le layout (à un endroit précis)
+
+FRONT CONTROLLER: contrôleur frontal sera l'interlocuteur exclusif entre client et l'application.
+aka : c'est par lui que passent TOUTES les requêtes HTTP = les url (href) ont forcément index.php?...
+
+COUCHE MODELE subdivisée: 
+- Manager spécifique à la donnée (table). ex: UserManager, TitulaireManager, CompteManager
+- Modèle (Entity) : représente en objet la table concernée (getters, setters)
+
+Un Manager renvoit systématiquement des objets Entity ou null.
+
+- abstract classes : AbstractEntity, AbstractManager => le but c'est de centraliser des portions de code pour éviter au maximum la répétitivité du code
+- DAO : se connecte à la base et nous fournit une instance de PDO !
+
+COUCHE CONTROLLER: 
+- est sollicitée par le Front Controller et renvoit systématiquement un tableau
+["view" => "dossier/nomfichier.php", "data" => $destrucs ]
+
+SERVICES:
+- des classes pouvant être sollicitées par n'importe quelle couche de l'appli
+- dossier spécifique : App ou Core
+- exemples de services : Session, Upload, SendMail !
+
+RESSOURCES PUBLIQUES:
+- un dossier /public contiendra les images, le js, le css, les pdf... Toute ressource devant être servies sans interprétation au navigateur client !
