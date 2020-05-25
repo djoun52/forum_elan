@@ -55,9 +55,9 @@
                 return $this;
         }    
 
-        public function getDate_de_creation()
+        public function getDate_de_creation($format)
         {
-                return $this->date_de_creation;
+             return $this->date_de_creation->format($format);
         }
         
         public function setDate_de_creation($date_de_creation)

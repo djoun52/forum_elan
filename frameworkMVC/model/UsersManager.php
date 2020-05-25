@@ -5,28 +5,29 @@
 
     class UsersManager extends AbstractManager
     {
-        private static $classname = "Model\User"; //C'est le FQCN parce que la classe est dans une string
+        private static $classname = "Model\Users"; //C'est le FQCN parce que la classe est dans une string
 
         public function __construct(){
             self::connect(self::$classname);
         }
 
-        public function findUser($username){
+        public function findUser($pseudo){
             
-            $sql = "SELECT * FROM Users WHERE username = :username";
+            $sql = "SELECT * FROM Users WHERE pseudo = :pseudo";
 
             return self::getOneOrNullResult(
-                self::select($sql, ['username' => $username], false),
+                self::select($sql, ['pseudo' => $pseudo], false),
                 self::$classname
             );
         }
 
-        public function addUser($username, $hash){
-            $sql = "INSERT INTO Users (username, password) VALUES (:username, :password)";
+        public function addUser($pseudo, $hash,$email){
+            $sql = "INSERT INTO Users (pseudo, password, email) VALUES (:username, :password, :email)";
 
             return self::create($sql, [
-                    'username' => $username,
-                    'password' => $hash
+                    'username' => $pseudo,
+                    'password' => $hash,
+                    'email' => $email,
             ]);
         }
 

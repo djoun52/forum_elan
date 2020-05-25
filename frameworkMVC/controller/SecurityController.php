@@ -1,7 +1,7 @@
 <?php
     namespace Controller;
 
-    use Model\UserManager;
+    use Model\UsersManager;
     use App\Session;
     use App\Router;
 
@@ -13,7 +13,7 @@
                 $username = filter_input(INPUT_POST, "username");
                 $password = filter_input(INPUT_POST, "password");
 
-                $model = new UserManager();
+                $model = new UsersManager();
                 if($user = $model->findUser($username)){
                     
                     if(password_verify($password, $user->getPassword())){
@@ -35,17 +35,19 @@
 
             if(!empty($_POST)){
                 
-                $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING);
+                $pseudo = filter_input(INPUT_POST, "pseudo", FILTER_SANITIZE_STRING);
+                $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING);
                 $pass1 = filter_input(INPUT_POST, "pass1");
                 $pass2 = filter_input(INPUT_POST, "pass2");
 
-                if($username && $pass1 && $pass2){
+                if($pseudo && $email && $pass1 && $pass2){
                     
                     if($pass1 == $pass2){
-                        $model = new UserManager();
-                        if(!$model->findUser($username)){
+                        $model = new UsersManager();
+                        if(!$model->findUser($pseudo)){
                             $hash = password_hash($pass1, PASSWORD_ARGON2I);
-                            if($model->addUser($username, $hash)){
+                            // $hash = $pass1;
+                            if($model->addUser($pseudo, $hash,$email)){
                                 Router::redirectTo("security", "login");
                             }
                         }

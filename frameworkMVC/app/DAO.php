@@ -3,8 +3,8 @@
 
     abstract class DAO
     {
-        const DB_HOST = "127.0.0.1:3306";
-        const DB_NAME = "user";
+        const DB_HOST = "localhost";
+        const DB_NAME = "forum";
         const DB_USER = "root";
         const DB_PASS = "";
 

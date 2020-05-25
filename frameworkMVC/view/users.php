@@ -4,9 +4,9 @@
     
         foreach($data['users'] as $user){
             ?>
-            <li><?= $user->getUsername()?> - 
-                Membre depuis le <?= $user->getCreated_at("d/m/Y")?>
-                à <?= $user->getCreated_at("H:i:s")?>
+            <li><?= $user->getPseudo()?> - 
+                Membre depuis le <?= $user->getDate_de_creation("d/m/Y")?>
+                à <?= $user->getDate_de_creation("H:i:s")?>
             </li>
             <?php
         }

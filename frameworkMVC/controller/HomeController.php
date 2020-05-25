@@ -2,7 +2,7 @@
     namespace Controller;
 
     use App\Session;
-    use Model\UserManager;
+    use Model\UsersManager;
 
     class HomeController
     {
@@ -20,7 +20,7 @@
 
             Session::authenticationRequired("ROLE_ADMIN");
 
-            $usermodel = new UserManager();
+            $usermodel = new UsersManager();
             $users = $usermodel->findAll();
 
             return [
