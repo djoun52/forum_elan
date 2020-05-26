@@ -3,7 +3,7 @@
 
     use App\AbstractEntity;
 
-    class sujet extends AbstractEntity
+    class Sujets extends AbstractEntity
     {
         private $id_sujet;
         private $titre;

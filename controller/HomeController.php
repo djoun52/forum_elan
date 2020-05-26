@@ -3,6 +3,7 @@
 
     use App\Session;
     use Model\UsersManager;
+    use Model\SujetsManager;
 
     class HomeController
     {
@@ -12,6 +13,15 @@
 
             return [
                 "view" => VIEW_PATH."home.php", 
+                "data" => null
+            ];
+        }
+        public function reserche(){
+
+            Session::authenticationRequired("ROLE_USER");
+
+            return [
+                "view" => VIEW_PATH."reserche.php", 
                 "data" => null
             ];
         }
@@ -31,4 +41,21 @@
                 ]
             ];
         }
+        public function listTopics(){
+
+            Session::authenticationRequired("ROLE_ADMIN");
+
+            $usermodel = new SujetsManager();
+            $topics = $usermodel->findAllSujets();
+
+            return [
+                "view" => VIEW_PATH."topics.php", 
+                "data" => [
+                    "topics" => $topics,
+                    
+                ]
+            ];
+        }
+
+        
     }

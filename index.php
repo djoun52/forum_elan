@@ -1,8 +1,11 @@
-<?php
+<?php  
+
+
     namespace App;
 
     require_once "app\Autoloader.php";
     Autoloader::register();
+var_dump($_POST);
 
     use App\Router;
 
@@ -19,3 +22,4 @@
     $result = Router::handleRequest($_GET);
 
     require VIEW_PATH."layout.php";
+  

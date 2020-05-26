@@ -3,7 +3,7 @@
     
     use App\AbstractManager;
 
-    class sujetManager extends AbstractManager
+    class SujetsManager extends AbstractManager
     {
         private static $classname = "Model\Sujets"; //C'est le FQCN parce que la classe est dans une string
 
@@ -11,12 +11,12 @@
             self::connect(self::$classname);
         }
 
-        public function findSujets($titre){
-            
-            $sql = "SELECT * FROM Sujets WHERE titre = :titre";
+        public function findSujetsBymots($mot){
+          
+            $sql = "SELECT * FROM sujets s WHERE s.titre LIKE :mot ";
 
-            return self::getOneOrNullResult(
-                self::select($sql, ['titre' => $titre], false),
+            return self::getResults(
+                self::select($sql, ['mot' => '%'.$mot.'%'] , true),
                 self::$classname
             );
         }
@@ -30,7 +30,7 @@
             ]);
         }
 
-        public function findAll(){
+        public function findAllSujets(){
             $sql = "SELECT * FROM Sujets";
 
             return self::getResults(
@@ -38,4 +38,13 @@
                 self::$classname
             );
         }
+        public function findSujetsByCategorie($categorie){
+            $sql = "SELECT * FROM sujets s INNER JOIN categorie c ON c.id_categorie = s.ID_categorie WHERE c.nom_categorie = :categorie";    
+
+            return self::getResults(
+                self::select($sql, ['categorie' =>$categorie], true),
+                self::$classname
+            );
+        }
+
     }
