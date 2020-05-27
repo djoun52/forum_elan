@@ -18,7 +18,7 @@ class ResercheController
                     $usermodel = new SujetsManager();
                     $topics = $usermodel->findSujetsByCategorie($_POST["reserche"]);
                     return [
-                        "view" => VIEW_PATH . "topics.php",
+                        "view" => "topics.php",
                         "data" => [
                             "topics" => $topics,
                         ]
@@ -28,7 +28,7 @@ class ResercheController
                     $sujetmodel = new SujetsManager();
                     $topics = $sujetmodel->findSujetsBymots($_POST["reserche"]);
                     return [
-                        "view" => VIEW_PATH . "topics.php",
+                        "view" =>"topics.php",
                         "data" => [
                             "topics" => $topics,
                         ]

@@ -5,55 +5,55 @@
 
     class Categorie extends AbstractEntity
     {
-        private $id_categorie;
-        private $nom_categorie;
+        private $id;
+        private $nom;
        
         public function __construct($data){
             parent::hydrate($data, $this);
         }
     
         /**
-         * Get the value of nom_categorie
+         * Get the value of id
          */ 
-        public function getNom_categorie()
+        public function getId()
         {
-                return $this->nom_categorie;
+                return $this->id;
         }
 
         /**
-         * Set the value of nom_categorie
+         * Set the value of id
          *
          * @return  self
          */ 
-        public function setNom_categorie($nom_categorie)
+        public function setId($id)
         {
-                $this->nom_categorie = $nom_categorie;
+                $this->id = $id;
 
                 return $this;
         }
 
         /**
-         * Get the value of id_categorie
+         * Get the value of nom
          */ 
-        public function getId_categorie()
+        public function getNom()
         {
-                return $this->id_categorie;
+                return $this->nom;
         }
 
         /**
-         * Set the value of id_categorie
+         * Set the value of nom
          *
          * @return  self
          */ 
-        public function setId_categorie($id_categorie)
+        public function setNom($nom)
         {
-                $this->id_categorie = $id_categorie;
+                $this->nom = $nom;
 
                 return $this;
         }
 
         public function __toString(){
-            return $this->nom_categorie;
-            ;
+                return $this->nom_categorie;
+                ;
         }
     }

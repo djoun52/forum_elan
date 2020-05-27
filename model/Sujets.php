@@ -5,36 +5,37 @@
 
     class Sujets extends AbstractEntity
     {
-        private $id_sujet;
+        private $id;
         private $titre;
         private $statut;
-        private $date_de_creation;
+        private $datedecreation;
+        private $user_id;
+        private $categorie_id;
 
         public function __construct($data){
             parent::hydrate($data, $this);
         }
     
-       
         /**
-         * Get the value of id_sujet
+         * Get the value of id
          */ 
-        public function getId_sujet()
+        public function getId()
         {
-                return $this->id_sujet;
+                return $this->id;
         }
 
         /**
-         * Set the value of id_sujet
+         * Set the value of id
          *
          * @return  self
          */ 
-        public function setId_sujet($id_sujet)
+        public function setId($id)
         {
-                $this->id_sujet = $id_sujet;
+                $this->id = $id;
 
                 return $this;
         }
-
+       
         /**
          * Get the value of titre
          */ 
@@ -74,18 +75,61 @@
 
                 return $this;
         }
-        public function getDate_de_creation($format)
+        public function getDatedecreation($format)
         {
-             return $this->date_de_creation->format($format);
+             return $this->datedecreation->format($format);
         }
         
-        public function setDate_de_creation($date_de_creation)
+        public function setDatedecreation($datedecreation)
         {
-                $this->date_de_creation = new \DateTime($date_de_creation);
+                $this->datedecreation = new \DateTime($datedecreation);
+
+                return $this;
+        }  
+        
+        /**
+         * Get the value of categorie_id
+         */ 
+        public function getCategorie_id()
+        {
+                return $this->categorie_id;
+        }
+
+        /**
+         * Set the value of categorie_id
+         *
+         * @return  self
+         */ 
+        public function setCategorie_id($categorie_id)
+        {
+                $this->categorie_id = $categorie_id;
 
                 return $this;
         }
+
+
+        /**
+         * Get the value of user_id
+         */ 
+        public function getUser_id()
+        {
+                return $this->user_id;
+        }
+
+        /**
+         * Set the value of user_id
+         *
+         * @return  self
+         */ 
+        public function setUser_id($user_id)
+        {
+                $this->user_id = $user_id;
+
+                return $this;
+        }
+
         public function __toString(){
                 return $this->titre;
             }
+
     }

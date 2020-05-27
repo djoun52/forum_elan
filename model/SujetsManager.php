@@ -13,7 +13,7 @@
 
         public function findSujetsBymots($mot){
           
-            $sql = "SELECT * FROM sujets s WHERE s.titre LIKE :mot ";
+            $sql = "SELECT * FROM sujets s WHERE s.titre LIKE :mot ORDER BY s.datedecreation DESC ";
 
             return self::getResults(
                 self::select($sql, ['mot' => '%'.$mot.'%'] , true),
@@ -21,6 +21,14 @@
             );
         }
 
+        public function findOneById($id){
+            $sql = "SELECT * FROM Sujets WHERE id = :id";
+
+            return self::getOneOrNullResult(
+                self::select($sql, ['id' => $id], false),
+                self::$classname
+            );
+        }
         public function addSujets($titre, $statut){
             $sql = "INSERT INTO Sujets (titre, statut) VALUES (:titre, :statut)";
 
@@ -39,10 +47,18 @@
             );
         }
         public function findSujetsByCategorie($categorie){
-            $sql = "SELECT * FROM sujets s INNER JOIN categorie c ON c.id_categorie = s.ID_categorie WHERE c.nom_categorie = :categorie";    
+            $sql = "SELECT * FROM sujets s INNER JOIN categorie c ON c.id = s.categorie_id WHERE c.nom = :categorie ORDER BY s.datedecreation DESC";    
 
             return self::getResults(
                 self::select($sql, ['categorie' =>$categorie], true),
+                self::$classname
+            );
+        }
+        public function findByGrade($idcategorie){
+            $sql = "SELECT id, username, createdat FROM user WHERE grade_id = :id";
+
+            return self::getResults(
+                self::select($sql, ['id' => $idcategorie], true),
                 self::$classname
             );
         }

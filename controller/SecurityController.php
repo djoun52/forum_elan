@@ -1,7 +1,7 @@
 <?php
     namespace Controller;
 
-    use Model\UsersManager;
+    use Model\UserManager;
     use App\Session;
     use App\Router;
 
@@ -13,7 +13,7 @@
                 $username = filter_input(INPUT_POST, "username");
                 $password = filter_input(INPUT_POST, "password");
 
-                $model = new UsersManager();
+                $model = new UserManager();
                 if($user = $model->findUser($username)){
                     
                     if(password_verify($password, $user->getPassword())){
@@ -26,7 +26,7 @@
             }
                 
             return [
-                "view" => VIEW_PATH."login.php", 
+                "view" => "login.php", 
                 "data" => null
             ];
         }
@@ -43,10 +43,9 @@
                 if($pseudo && $email && $pass1 && $pass2){
                     
                     if($pass1 == $pass2){
-                        $model = new UsersManager();
+                        $model = new UserManager();
                         if(!$model->findUser($pseudo)){
                             $hash = password_hash($pass1, PASSWORD_ARGON2I);
-                            // $hash = $pass1;
                             if($model->addUser($pseudo, $hash,$email)){
                                 Router::redirectTo("security", "login");
                             }
@@ -59,11 +58,13 @@
             }
                 
             return [
-                "view" => VIEW_PATH."register.php", 
+                "view" => "register.php", 
                 "data" => null
             ];
         }
-
+        public function affiche(){
+            return false;
+        }
 
         public function logout(){
             Session::removeUser();

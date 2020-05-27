@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -21,6 +21,7 @@
                 <a href="?ctrl=security&method=logout">Déconnexion</a>
                 <a href="?ctrl=home&method=listUsers">Liste des utilisateurs</a>
                 <a href="?ctrl=home&method=listTopics">Liste des topics</a>
+                <a href="?ctrl=home&method=listCategorie">Liste des categorie</a>
             <?php
             } else {
             ?>
@@ -32,14 +33,10 @@
         </nav>
         <main>
             <h1>Forum</h1>
+        
+
             <div id="page">
-
-                <!-- THE HOLE !!! -->
-                <?php
-                $data = $result['data'];
-                require $result['view'];
-                ?>
-
+               <?= $page ?>
             </div>
         </main>
 

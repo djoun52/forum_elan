@@ -21,6 +21,15 @@
             );
         }
 
+        public function findOneById($id){
+            $sql = "SELECT * FROM Message WHERE id = :id";
+
+            return self::getOneOrNullResult(
+                self::select($sql, ['id' => $id], false),
+                self::$classname
+            );
+        }
+
         public function addMessage($texte){
             $sql = "INSERT INTO Message (texte) VALUES (:texte)";
 

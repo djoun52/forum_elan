@@ -21,6 +21,15 @@
             );
         }
 
+        public function findOneById($id){
+            $sql = "SELECT * FROM Categorie WHERE id = :id";
+
+            return self::getOneOrNullResult(
+                self::select($sql, ['id' => $id], false),
+                self::$classname
+            );
+        }
+
         public function addNom_categorie($nom_categorie){
             $sql = "INSERT INTO Categorie (nom_categorie) VALUES (:username,)";
 
@@ -29,7 +38,7 @@
             ]);
         }
 
-        public function findAll(){
+        public function findAllCategorie(){
             $sql = "SELECT * FROM Categorie";
 
             return self::getResults(

@@ -1,11 +1,10 @@
 <?php  
-
-
     namespace App;
 
     require_once "app\Autoloader.php";
     Autoloader::register();
-var_dump($_POST);
+    var_dump($_POST);
+    var_dump($_POST);
 
     use App\Router;
 
@@ -21,5 +20,15 @@ var_dump($_POST);
 
     $result = Router::handleRequest($_GET);
 
-    require VIEW_PATH."layout.php";
+    ob_start();
+    if(is_array($result) && array_key_exists('view', $result)){
+        $data = isset($result['data']) ? $result['data'] : null;
+        include VIEW_PATH.$result['view'];
+    }
+    else include VIEW_PATH."404.html";
+    $page = ob_get_contents();
+    ob_end_clean();
+
+    include VIEW_PATH."layout.php";
+    
   

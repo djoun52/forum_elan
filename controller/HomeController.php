@@ -2,8 +2,9 @@
     namespace Controller;
 
     use App\Session;
-    use Model\UsersManager;
+    use Model\UserManager;
     use Model\SujetsManager;
+    use Model\CategorieManager;
 
     class HomeController
     {
@@ -12,7 +13,7 @@
             Session::authenticationRequired("ROLE_USER");
 
             return [
-                "view" => VIEW_PATH."home.php", 
+                "view" => "home.php", 
                 "data" => null
             ];
         }
@@ -21,20 +22,21 @@
             Session::authenticationRequired("ROLE_USER");
 
             return [
-                "view" => VIEW_PATH."reserche.php", 
+                "view" => "reserche.php", 
                 "data" => null
             ];
         }
 
+      
         public function listUsers(){
 
             Session::authenticationRequired("ROLE_ADMIN");
 
-            $usermodel = new UsersManager();
+            $usermodel = new UserManager();
             $users = $usermodel->findAll();
 
             return [
-                "view" => VIEW_PATH."users.php", 
+                "view" => "users.php", 
                 "data" => [
                     "users" => $users,
                     
@@ -44,18 +46,44 @@
         public function listTopics(){
 
             Session::authenticationRequired("ROLE_ADMIN");
+            $categoriemodel= new CategorieManager;
+            $sujetmodel = new SujetsManager();
 
-            $usermodel = new SujetsManager();
-            $topics = $usermodel->findAllSujets();
+            $categorie = $categoriemodel->findAllCategorie();
+            foreach($categorie as $categorie){
+                $topics = $sujetmodel->findAllSujets($categorie->getId());
+                $categorie-> setNom($topics);
+            }
+        
 
             return [
-                "view" => VIEW_PATH."topics.php", 
+                "view" => "topics.php", 
                 "data" => [
                     "topics" => $topics,
                     
                 ]
             ];
         }
+        public function listCategorie(){
 
+            Session::authenticationRequired("ROLE_ADMIN");
+            $categoriemodel= new CategorieManager;
+            $sujetmodel = new SujetsManager();
+
+            $sujets = $sujetmodel->findAllSujets();
+            foreach($sujets as $sujets){
+                $categorie = $categoriemodel->findAllCategorie($sujets->getId());
+                $sujets-> setTitre($categorie);
+            }
+        
+
+            return [
+                "view" => "categorie.php", 
+                "data" => [
+                    "categorie" => $categorie,
+                    
+                ]
+            ];
+        }
         
     }

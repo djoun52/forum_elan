@@ -5,9 +5,11 @@
 
     class Message extends AbstractEntity
     {
-        private $id_message;
+        private $id;
         private $texte;
-        private $date_de_creation;
+        private $datedecreation;
+        private $sujet_id;
+        private $user_id;
 
 
         public function __construct($data){
@@ -16,21 +18,21 @@
 
 
         /**
-         * Get the value of id_message
+         * Get the value of id
          */ 
-        public function getId_message()
+        public function getId()
         {
-                return $this->id_message;
+                return $this->id;
         }
 
         /**
-         * Set the value of id_message
+         * Set the value of id
          *
          * @return  self
          */ 
-        public function setId_message($id_message)
+        public function setId($id)
         {
-                $this->id_message = $id_message;
+                $this->id = $id;
 
                 return $this;
         }
@@ -55,19 +57,74 @@
                 return $this;
         }    
 
-        public function getDate_de_creation($format)
+       
+        /**
+         * Get the value of datedecreation
+         */ 
+        public function getDatedecreation()
         {
-             return $this->date_de_creation->format($format);
+                return $this->datedecreation;
         }
-        
-        public function setDate_de_creation($date_de_creation)
+
+        /**
+         * Set the value of datedecreation
+         *
+         * @return  self
+         */ 
+        public function setDatedecreation($datedecreation)
         {
-                $this->date_de_creation = new \DateTime($date_de_creation);
+                $this->datedecreation = $datedecreation;
 
                 return $this;
         }
        
+        
+      
+
+        /**
+         * Get the value of sujet_id
+         */ 
+        public function getSujet_id()
+        {
+                return $this->sujet_id;
+        }
+
+        /**
+         * Set the value of sujet_id
+         *
+         * @return  self
+         */ 
+        public function setSujet_id($sujet_id)
+        {
+                $this->sujet_id = $sujet_id;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of user_id
+         */ 
+        public function getUser_id()
+        {
+                return $this->user_id;
+        }
+
+        /**
+         * Set the value of user_id
+         *
+         * @return  self
+         */ 
+        public function setUser_id($user_id)
+        {
+                $this->user_id = $user_id;
+
+                return $this;
+        }  
+        
         public function __toString(){
             return $this->texte;
         }
+
+    
+
     }

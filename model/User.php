@@ -3,40 +3,39 @@
 
     use App\AbstractEntity;
 
-    class Users extends AbstractEntity
+    class User extends AbstractEntity
     {
-        private $id_user;
+        private $id;
         private $pseudo;
         private $password;
         private $email;
         private $statut;
-        private $date_de_creation;
+        private $datedecreation;
 
         public function __construct($data){
             parent::hydrate($data, $this);
         }
     
-       
-        /**
-         * Get the value of id_user
+          /**
+         * Get the value of id
          */ 
-        public function getId_user()
+        public function getId()
         {
-                return $this->id_user;
+                return $this->id;
         }
 
         /**
-         * Set the value of id_user
+         * Set the value of id
          *
          * @return  self
          */ 
-        public function setId_user($id_user)
+        public function setId($id)
         {
-                $this->id_user = $id_user;
+                $this->id = $id;
 
                 return $this;
         }
-
+        
         /**
          * Get the value of pseudo
          */ 
@@ -118,14 +117,22 @@
         }
 
 
-        public function getDate_de_creation($format)
+        /**
+         * Get the value of datedecreation
+         */ 
+        public function getDatedecreation()
         {
-             return $this->date_de_creation->format($format);
+                return $this->datedecreation;
         }
-        
-        public function setDate_de_creation($date_de_creation)
+
+        /**
+         * Set the value of datedecreation
+         *
+         * @return  self
+         */ 
+        public function setDatedecreation($datedecreation)
         {
-                $this->date_de_creation = new \DateTime($date_de_creation);
+                $this->datedecreation = $datedecreation;
 
                 return $this;
         }
@@ -133,6 +140,4 @@
         public function __toString(){
                 return $this->pseudo;
         }
-
-       
     }
