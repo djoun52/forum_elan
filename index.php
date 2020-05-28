@@ -4,8 +4,8 @@
     require_once "app\Autoloader.php";
     Autoloader::register();
     var_dump($_POST);
-    var_dump($_POST);
-
+ 
+    
     use App\Router;
 
     define('DS', DIRECTORY_SEPARATOR);

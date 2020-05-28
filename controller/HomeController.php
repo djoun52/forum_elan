@@ -22,7 +22,16 @@
             Session::authenticationRequired("ROLE_USER");
 
             return [
-                "view" => "reserche.php", 
+                "view" => "topics.php", 
+                "data" => null
+            ];
+        }
+        public function create(){
+
+            Session::authenticationRequired("ROLE_USER");
+
+            return [
+                "view" => "create.php", 
                 "data" => null
             ];
         }

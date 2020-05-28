@@ -21,7 +21,8 @@
                 <a href="?ctrl=security&method=logout">Déconnexion</a>
                 <a href="?ctrl=home&method=listUsers">Liste des utilisateurs</a>
                 <a href="?ctrl=home&method=listTopics">Liste des topics</a>
-                <a href="?ctrl=home&method=listCategorie">Liste des categorie</a>
+                <a href="?ctrl=home&method=listCategorie">Liste des categories</a>
+                <a href="?ctrl=home&method=create">créer un topic </a>
             <?php
             } else {
             ?>

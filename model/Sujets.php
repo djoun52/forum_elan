@@ -9,8 +9,8 @@
         private $titre;
         private $statut;
         private $datedecreation;
-        private $user_id;
-        private $categorie_id;
+        private $user;
+        private $categorie;
 
         public function __construct($data){
             parent::hydrate($data, $this);
@@ -87,43 +87,42 @@
                 return $this;
         }  
         
-        /**
-         * Get the value of categorie_id
+       /**
+         * Get the value of user
          */ 
-        public function getCategorie_id()
+        public function getUser()
         {
-                return $this->categorie_id;
+                return $this->user;
         }
 
         /**
-         * Set the value of categorie_id
+         * Set the value of user
          *
          * @return  self
          */ 
-        public function setCategorie_id($categorie_id)
+        public function setUser($user)
         {
-                $this->categorie_id = $categorie_id;
+                $this->user = $user;
 
                 return $this;
         }
 
-
         /**
-         * Get the value of user_id
+         * Get the value of categorie
          */ 
-        public function getUser_id()
+        public function getCategorie()
         {
-                return $this->user_id;
+                return $this->categorie;
         }
 
         /**
-         * Set the value of user_id
+         * Set the value of categorie
          *
          * @return  self
          */ 
-        public function setUser_id($user_id)
+        public function setCategorie($categorie)
         {
-                $this->user_id = $user_id;
+                $this->categorie = $categorie;
 
                 return $this;
         }
@@ -132,4 +131,6 @@
                 return $this->titre;
             }
 
+
+        
     }

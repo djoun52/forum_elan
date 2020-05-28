@@ -8,8 +8,8 @@
         private $id;
         private $texte;
         private $datedecreation;
-        private $sujet_id;
-        private $user_id;
+        private $sujet;
+        private $user;
 
 
         public function __construct($data){
@@ -80,51 +80,53 @@
        
         
       
-
         /**
-         * Get the value of sujet_id
+         * Get the value of sujet
          */ 
-        public function getSujet_id()
+        public function getSujet()
         {
-                return $this->sujet_id;
+                return $this->sujet;
         }
 
         /**
-         * Set the value of sujet_id
+         * Set the value of sujet
          *
          * @return  self
          */ 
-        public function setSujet_id($sujet_id)
+        public function setSujet($sujet)
         {
-                $this->sujet_id = $sujet_id;
+                $this->sujet = $sujet;
 
                 return $this;
         }
 
         /**
-         * Get the value of user_id
+         * Get the value of user
          */ 
-        public function getUser_id()
+        public function getUser()
         {
-                return $this->user_id;
+                return $this->user;
         }
 
         /**
-         * Set the value of user_id
+         * Set the value of user
          *
          * @return  self
          */ 
-        public function setUser_id($user_id)
+        public function setUser($user)
         {
-                $this->user_id = $user_id;
+                $this->user = $user;
 
                 return $this;
-        }  
+        }
+
+       
         
         public function __toString(){
             return $this->texte;
         }
 
     
+
 
     }
