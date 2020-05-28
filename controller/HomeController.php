@@ -94,5 +94,7 @@
                 ]
             ];
         }
-        
+        public function affiche(){
+            return false;
+        }
     }

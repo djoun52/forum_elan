@@ -30,11 +30,13 @@
             );
         }
 
-        public function addMessage($texte){
-            $sql = "INSERT INTO Message (texte) VALUES (:texte)";
+        public function addMessage($texte,$sujet_id,$user_id){
+            $sql = "INSERT INTO Message (texte, sujet_id , user_id) VALUES (:texte , :sujet_id, :user_id)";
 
             return self::create($sql, [
                     'texte' => $texte,
+                    'sujet_id' => $sujet_id,
+                    'user_id' => $user_id,
 
             ]);
         }

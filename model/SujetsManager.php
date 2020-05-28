@@ -29,15 +29,32 @@
                 self::$classname
             );
         }
-        public function addSujets($titre, $statut){
-            $sql = "INSERT INTO Sujets (titre, statut) VALUES (:titre, :statut)";
+        public function findOneBytitre($titre){
+            $sql = "SELECT * FROM Sujets WHERE titre = :titre";
+
+            return self::getOneOrNullResult(
+                self::select($sql, ['titre' => $titre], false),
+                self::$classname
+            );
+        }
+        public function findOneidBytitre($titre){
+            $sql = "SELECT id FROM Sujets WHERE titre = :titre";
+
+            return self::getOneOrNullResult(
+                self::select($sql, ['titre' => $titre], false),
+                self::$classname
+            );
+        }
+        public function addSujets($titre, $user_id ,$categorie_id){
+            $sql = "INSERT INTO Sujets (titre, user_id ,  categorie_id  ) VALUES (:titre, :user, :categorie_id;)";
 
             return self::create($sql, [
-                    'titre' => $titre,
-                    'statut' => $statut
+                    'titre' => $titre, 
+                    'user' => $user_id,
+                    'categorie_id' => $categorie_id,
             ]);
         }
-
+    
         public function findAllSujets(){
             $sql = "SELECT * FROM Sujets";
 
@@ -54,13 +71,6 @@
                 self::$classname
             );
         }
-        public function findByGrade($idcategorie){
-            $sql = "SELECT id, username, createdat FROM user WHERE grade_id = :id";
-
-            return self::getResults(
-                self::select($sql, ['id' => $idcategorie], true),
-                self::$classname
-            );
-        }
+    
 
     }

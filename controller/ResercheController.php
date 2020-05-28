@@ -2,6 +2,7 @@
 
 namespace Controller;
 use App\Session;
+use App\Router;
 use Model\SujetsManager;
 
 
@@ -12,11 +13,12 @@ class ResercheController
         Session::authenticationRequired("ROLE_USER");
 
         if (!empty($_POST['reserche'])){
-
+            $reserche = filter_input(INPUT_POST, "reserche", FILTER_SANITIZE_STRING);
             switch ($_POST['type']) {
                 case 'categorie':
+  
                     $usermodel = new SujetsManager();
-                    $topics = $usermodel->findSujetsByCategorie($_POST["reserche"]);
+                    $topics = $usermodel->findSujetsByCategorie($reserche);
                     return [
                         "view" => "topics.php",
                         "data" => [
@@ -26,7 +28,7 @@ class ResercheController
                     break;
                 case 'mot':
                     $sujetmodel = new SujetsManager();
-                    $topics = $sujetmodel->findSujetsBymots($_POST["reserche"]);
+                    $topics = $sujetmodel->findSujetsBymots($reserche);
                     return [
                         "view" =>"topics.php",
                         "data" => [
@@ -35,44 +37,37 @@ class ResercheController
                     ];
                     break;
             }
-        }else {
-            header('Location: ?ctrl=home&method=reserche    ');
         }
+        return [
+            "view" => "topics.php", 
+            "data" => null
+        ];
     
     }
     public function reserchelink()
     {
         Session::authenticationRequired("ROLE_USER");
 
-        if (!empty($_POST['reserche'])){
-
-            switch ($_POST['type']) {
-                case 'categorie':
-                    $usermodel = new SujetsManager();
-                    $topics = $usermodel->findSujetsByCategorie($_POST["reserche"]);
-                    return [
-                        "view" => "topics.php",
-                        "data" => [
-                            "topics" => $topics,
-                        ]
-                    ];
-                    break;
-                case 'mot':
-                    $sujetmodel = new SujetsManager();
-                    $topics = $sujetmodel->findSujetsBymots($_POST["reserche"]);
-                    return [
-                        "view" =>"topics.php",
-                        "data" => [
-                            "topics" => $topics,
-                        ]
-                    ];
-                    break;
-            }
-        }else {
-            header('Location: ?ctrl=home&method=reserche    ');
+        if ($_GET['categorie']){
+            $categorie = filter_input(INPUT_GET, "categorie", FILTER_SANITIZE_STRING);
+            $usermodel = new SujetsManager();
+            $topics = $usermodel->findSujetsByCategorie($categorie);
+            return [
+                "view" => "topics.php",
+                "data" => [
+                    "topics" => $topics,
+                ]
+        ]; 
         }
-    
+        return [
+            "view" => "home.php", 
+            "data" => null
+        ];
+  
     }
-
+    public function affiche(){
+        return false;
    
+    }
+    
 }

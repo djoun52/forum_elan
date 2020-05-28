@@ -11,12 +11,21 @@
             self::connect(self::$classname);
         }
 
-        public function findNom_categorie($nom_categorie){
+        public function findOneByNom($nom){
             
-            $sql = "SELECT * FROM Categorie WHERE nom_categorie = :nom_categorie";
+            $sql = "SELECT * FROM Categorie WHERE nom = :nom";
 
             return self::getOneOrNullResult(
-                self::select($sql, ['nom_categorie' => $nom_categorie], false),
+                self::select($sql, ['nom' => $nom], false),
+                self::$classname
+            );
+        }
+        public function findOneIdByNom($nom){
+            
+            $sql = "SELECT id FROM Categorie WHERE nom = :nom";
+
+            return self::getOneOrNullResult(
+                self::select($sql, ['nom' => $nom], false),
                 self::$classname
             );
         }
@@ -30,11 +39,11 @@
             );
         }
 
-        public function addNom_categorie($nom_categorie){
-            $sql = "INSERT INTO Categorie (nom_categorie) VALUES (:username,)";
+        public function addcategorie($nom){
+            $sql = "INSERT INTO Categorie (nom) VALUES (:nom)";
 
             return self::create($sql, [
-                    'nom_categorie' => $nom_categorie,
+                    'nom' => $nom,
             ]);
         }
 

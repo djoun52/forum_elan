@@ -36,7 +36,7 @@
             if(!empty($_POST)){
                 
                 $pseudo = filter_input(INPUT_POST, "pseudo", FILTER_SANITIZE_STRING);
-                $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING);
+                $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
                 $pass1 = filter_input(INPUT_POST, "pass1");
                 $pass2 = filter_input(INPUT_POST, "pass2");
 

@@ -13,8 +13,8 @@
      var_dump($data);
         foreach($data['categorie'] as $categorie){
             ?>
-            <li><?= $categorie->getNom()?> 
-               
+            <li>
+            <a href="?ctrl=reserche&method=reserchelink&categorie=<?= $categorie->getNom()?> "><?= $categorie->getNom()?> </a>
             </li>
             <?php
         }
