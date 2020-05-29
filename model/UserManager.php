@@ -13,7 +13,7 @@
 
         public function findUser($pseudo){
             
-            $sql = "SELECT * FROM User WHERE pseudo = :pseudo";
+            $sql = "SELECT * FROM Users WHERE pseudo = :pseudo";
 
             return self::getOneOrNullResult(
                 self::select($sql, ['pseudo' => $pseudo], false),
@@ -21,7 +21,7 @@
             );
         }
         public function findOneById($id){
-            $sql = "SELECT * FROM User WHERE id = :id";
+            $sql = "SELECT * FROM Users WHERE id = :id";
 
             return self::getOneOrNullResult(
                 self::select($sql, ['id' => $id], false),
@@ -29,7 +29,7 @@
             );
         }
         public function addUser($pseudo, $hash,$email){
-            $sql = "INSERT INTO User (pseudo, password, email) VALUES (:username, :password, :email)";
+            $sql = "INSERT INTO Users (pseudo, password, email) VALUES (:username, :password, :email)";
 
             return self::create($sql, [
                     'username' => $pseudo,
@@ -39,7 +39,7 @@
         }
 
         public function findAll(){
-            $sql = "SELECT * FROM User";
+            $sql = "SELECT * FROM Users";
 
             return self::getResults(
                 self::select($sql, null, true),

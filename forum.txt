@@ -1,0 +1,39 @@
+
+CREATE TABLE Users(
+   id NOT NULL AUTO_INCREMENT,
+   pseudo VARCHAR(50),
+   datedecreation DATE,
+   email VARCHAR(50),
+   password VARCHAR(50),
+   statut VARCHAR(50),
+   PRIMARY KEY(id)
+);
+
+CREATE TABLE Categorie(
+   id NOT NULL AUTO_INCREMENT,
+   nom VARCHAR(50),
+   PRIMARY KEY(id)
+);
+
+CREATE TABLE Sujets(
+   id NOT NULL AUTO_INCREMENT,
+   titre VARCHAR(50),
+   datedecreation DATE,
+   statut VARCHAR(50),
+   id_1 INT NOT NULL,
+   id_2 INT NOT NULL,
+   PRIMARY KEY(id),
+   FOREIGN KEY(categorie_id) REFERENCES Categorie(id),
+   FOREIGN KEY(user_id) REFERENCES Users(id)
+);
+
+CREATE TABLE Message(
+   id NOT NULL AUTO_INCREMENT,
+   texte VARCHAR(50),
+   date_de_creation VARCHAR(50),
+   id_1 INT NOT NULL,
+   id_2 INT NOT NULL,
+   PRIMARY KEY(id),
+   FOREIGN KEY(sujets_id) REFERENCES Sujets(id),
+   FOREIGN KEY(user_id) REFERENCES Users(id)
+);
