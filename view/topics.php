@@ -10,7 +10,7 @@
        <li> message poster par <?= $message->getUser()->getPseudo()?> le <?= $message->getDatedecreation("d/m/Y")?>
         à <?= $message->getDatedecreation("H:i:s")?>
         <p> <?= $message->getTexte() ?></p>
-        <a href=""></a>
+        <a href="?ctrl=topics&method=supMessage&id=<?= $message->getId()?>">suprimer le message</a>
        </li>
 
        <?php

@@ -16,6 +16,13 @@
             }
             return null;
         }
+        protected static function getOneOrNullResultInt($row){
+            
+            if($row != null){
+                return $row;
+            }
+            return null;
+        }
 
         protected static function getResults($rows, $class){
             
@@ -50,7 +57,9 @@
             
         }
 
-        protected static function delete(){
+        protected static function delete($sql, $params){
+            $stmt = self::$connection->prepare($sql);
             
+            return $stmt->execute($params);
         }
     }

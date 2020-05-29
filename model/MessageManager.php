@@ -51,19 +51,33 @@
             );
         }
         public function findMessageByTopics($topics){
-            $sql = "SELECT * FROM message m 
-                    INNER JOIN sujets s 
-                    ON s.id = m.sujets_id 
-                    WHERE s.titre = :topics
-                    ORDER BY m.datedecreation DESC ";
+            $sql = "SELECT m.id,m.texte, m.datedecreation,m.sujets_id,m.user_id  FROM message m 
+                INNER JOIN sujets s 
+                ON s.id = m.sujets_id 
+                WHERE s.titre = :topics
+                ORDER BY m.datedecreation DESC ";
 
             return self::getResults(
                 self::select($sql, ['topics' =>$topics], true),
                 self::$classname
             );
         }
-        public function removeMessage(){
-        
+        public function removeMessage($id){
+
+            $sql = "DELETE FROM `message` WHERE id = :id" ;
+           
+            return self::delete($sql, [ 
+                    'id'=>$id 
+            ]);
         }
+
+        public function countMessageBySujetsId($id){
+            $sql = "SELECT COUNT(sujets_id) FROM `message` WHERE `sujets_id` = :id;";
+
+            return self::getOneOrNullResultInt(
+                self::select($sql, ['id' => $id], false)
+            );
+        } 
+
 
     }

@@ -79,6 +79,13 @@
                 self::$classname
             );
         }
-    
+        public function removeSujet($id){
+
+            $sql = "DELETE FROM `sujets` WHERE id = :id" ;
+           
+            return self::delete($sql, [ 
+                    'id'=>$id 
+            ]);
+        }
 
     }

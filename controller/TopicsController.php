@@ -33,11 +33,10 @@ class TopicsController
         if ($_POST['message']) {
             $message = filter_input(INPUT_POST, "message", FILTER_SANITIZE_STRING);
             $model = new MessageManager();
-            $messagemodel = new MessageManager();
             $idTopics = Session::getTopics()->getId() ;
             $titreTopics = Session::getTopics()->getTitre() ;
             $model->addMessage($message,$idTopics);
-            $message = $messagemodel->findMessageByTopics($titreTopics);
+            $message = $model->findMessageByTopics($titreTopics);
         }
         return [
             "view" => "topics.php",
@@ -51,10 +50,39 @@ class TopicsController
 
     public function supMessage(){
         Session::authenticationRequired("ROLE_USER");
+        if ($_GET['id']){
+            $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING);
+        // var_dump($id);
+        $model = new MessageManager();
+    
+        $message= $model->findOneById($id); 
+        $topic=$message->getSujets();
+        $idTopic=$topic-> getId();
+        $titre=$topic->getTitre();
+        // var_dump($model->countMessageBySujetsId($idTopic));
+        $model->removeMessage($id); 
+        $numberMessage=$model->countMessageBySujetsId($idTopic);
+        var_dump($numberMessage);
+        $sujetsmodel = new SujetsManager();
         
-    }
+        if($numberMessage > 0){ 
+           
+            // header("Location: ?ctrl=topics&method=listeMessage&topics=$titre");  
+            die();
+        }else{
+            
+            $sujetsmodel->removeSujet($idTopic);
+            header("Location: ?ctrl=home&method=listTopics");
+           
+            die();
+        }
 
+        }
+    } 
+        
 
+    
+   
 
 
 }

@@ -8,7 +8,7 @@
         private $id;
         private $texte;
         private $datedecreation;
-        private $sujet;
+        private $sujets;
         private $user;
 
 
@@ -80,25 +80,7 @@
        
         
       
-        /**
-         * Get the value of sujet
-         */ 
-        public function getSujet()
-        {
-                return $this->sujet;
-        }
-
-        /**
-         * Set the value of sujet
-         *
-         * @return  self
-         */ 
-        public function setSujet($sujet)
-        {
-                $this->sujet = $sujet;
-
-                return $this;
-        }
+    
 
         /**
          * Get the value of user
@@ -129,4 +111,24 @@
     
 
 
+
+        /**
+         * Get the value of sujets
+         */ 
+        public function getSujets()
+        {
+                return $this->sujets;
+        }
+
+        /**
+         * Set the value of sujets
+         *
+         * @return  self
+         */ 
+        public function setSujets($sujets)
+        {
+                $this->sujets = $sujets;
+
+                return $this;
+        }
     }
