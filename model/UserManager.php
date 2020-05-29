@@ -11,7 +11,7 @@
             self::connect(self::$classname);
         }
 
-        public function findUser($pseudo){
+        public function findOneByPseudo($pseudo){
             
             $sql = "SELECT * FROM Users WHERE pseudo = :pseudo";
 
@@ -25,6 +25,14 @@
 
             return self::getOneOrNullResult(
                 self::select($sql, ['id' => $id], false),
+                self::$classname
+            );
+        }
+        public function findOneByEmail($email){
+            $sql = "SELECT * FROM Users WHERE email = :email";
+
+            return self::getOneOrNullResult(
+                self::select($sql, ['email' => $email], false),
                 self::$classname
             );
         }

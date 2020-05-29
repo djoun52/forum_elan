@@ -1,6 +1,6 @@
 <?php
     namespace Model;
-    
+    use App\Session;
     use App\AbstractManager;
 
     class MessageManager extends AbstractManager
@@ -30,13 +30,14 @@
             );
         }
 
-        public function addMessage($texte,$sujet_id,$user_id){
-            $sql = "INSERT INTO Message (texte, sujet_id , user_id) VALUES (:texte , :sujet_id, :user_id)";
+        public function addMessage($texte,$sujets_id){
+
+            $sql = "INSERT INTO Message (texte, sujets_id , user_id) VALUES (:texte , :sujets_id, :user_id)";
 
             return self::create($sql, [
                     'texte' => $texte,
-                    'sujet_id' => $sujet_id,
-                    'user_id' => $user_id,
+                    'sujets_id' => $sujets_id,
+                    'user_id' => Session::getUser()->getId(),
 
             ]);
         }
@@ -49,4 +50,17 @@
                 self::$classname
             );
         }
+        public function findMessageByTopics($topics){
+            $sql = "SELECT * FROM message m 
+                    INNER JOIN sujets s 
+                    ON s.id = m.sujets_id 
+                    WHERE s.titre = :topics
+                    ORDER BY m.datedecreation DESC ";
+
+            return self::getResults(
+                self::select($sql, ['topics' =>$topics], true),
+                self::$classname
+            );
+        }
+
     }

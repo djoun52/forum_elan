@@ -5,6 +5,7 @@ use App\Session;
 
 use Model\SujetsManager;
 use Model\CategorieManager;
+use Model\MessageManager;
 
 
 
@@ -29,25 +30,27 @@ class CreateController
             }
             $categorieObj= $modelCategorie->findOneByNom($categorie) ;
             
-           
+
 
             if($titre && $message && $categorie){
                 $model = new SujetsManager();
                 if (!$model->findOneBytitre($titre)) {
-                     $t = Session::getUser();
+                     
                      var_dump($titre);
-                     var_dump(Session::getUser()->getId());
-                    $model-> addSujets($titre,$t->getId() ,$categorieObj->getId());
-                    
+
+                    $model-> addSujets($titre,$categorieObj->getId());
                 }
-                
+                $modelMess= new MessageManager;
+                $sujet= $model->findOneBytitre($titre) ; 
+                var_dump($sujet->getId());
+                $modelMess->addMessage($message,$sujet->getId());
                   
                     
             }
         }
             return [
             "view" => "home.php", 
-            "data" => Session::getUser()->getId()
+            "data" => null
         ];
         }
       
@@ -76,8 +79,8 @@ class CreateController
 
     }
 
-    // public function affiche(){
-    //     return false;
-    // }
+    public function affiche(){
+        return false;
+    }
 
 }

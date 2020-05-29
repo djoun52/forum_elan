@@ -14,7 +14,7 @@
                 $password = filter_input(INPUT_POST, "password");
 
                 $model = new UserManager();
-                if($user = $model->findUser($username)){
+                if($user = $model->findOneByPseudo($username)){
                     
                     if(password_verify($password, $user->getPassword())){
                         Session::setUser($user);
@@ -44,11 +44,15 @@
                     
                     if($pass1 == $pass2){
                         $model = new UserManager();
-                        if(!$model->findUser($pseudo)){
-                            $hash = password_hash($pass1, PASSWORD_ARGON2I);
-                            if($model->addUser($pseudo, $hash,$email)){
+
+                        if(!$model->findOneByPseudo($pseudo)){
+                            if(!$model->findOneByEmail($email)){
+                                $hash = password_hash($pass1, PASSWORD_ARGON2I);
+                                if($model->addUser($pseudo, $hash,$email)){
                                 Router::redirectTo("security", "login");
+                                }
                             }
+                            else var_dump("EMAIL DEJA EXISTANT");
                         }
                         else var_dump("USER DEJA EXISTANT");
                     }

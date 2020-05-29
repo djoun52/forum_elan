@@ -1,38 +1,17 @@
 
 
 
-<h2>Liste des topics</h2>
+<?php
+     var_dump($data);
+?>
 
 
-<form action="?ctrl=reserche&method=reserche" method="post">
-    <div class="input-group">
-        <input type="text" class="form-control" placeholder="rechercher topics" name="reserche" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4">
-        <div class="input-group-append" id="button-addon4">
-            <button class="btn btn-outline-primary" type="type" name="type" value="categorie">categorie</button>
-            <button class="btn btn-outline-primary" type="type" name="type" value="mot">mots-clés</button>
-        </div>
-    </div>
+<form action="?ctrl=topics&method=addMessage" method="post">
+<div class="form-group">
+    <label for="message">votre message</label>
+    <textarea class="form-control" name="message" id="message" rows="3"></textarea>
+  </div>
+
+
+  <button type="submit" class="btn btn-primary">poster</button>
 </form>
-<ul>
-
-
-
-
-    <?php
-    //  var_dump($data);
-    //  var_dump($data['topics']['0']);
-
-
-
-    if ($data['topics']) {
-        foreach ($data['topics'] as $topics) {
-    ?>
-            <li><?= $topics->getTitre() ?> -
-                créer par <?= $topics->getUser() ?> le <?= $topics->getDatedecreation("d/m/Y") ?>
-                à <?= $topics->getDatedecreation("H:i:s") ?>
-            </li>
-    <?php
-        }
-    }
-    ?>
-</ul>

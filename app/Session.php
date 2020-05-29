@@ -15,6 +15,16 @@
         public static function setUser($user){
             $_SESSION['user'] = $user;
         }
+        public static function getTopics(){
+            if(isset($_SESSION['topics']) && $_SESSION['topics'] !== null){
+                return $_SESSION['topics'];
+            }
+            return false;
+        }
+
+        public static function setTopics($topics){
+            $_SESSION['topics'] = $topics;
+        }
 
         public static function removeUser(){
             if(self::getUser()){

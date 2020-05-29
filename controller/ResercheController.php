@@ -20,7 +20,7 @@ class ResercheController
                     $usermodel = new SujetsManager();
                     $topics = $usermodel->findSujetsByCategorie($reserche);
                     return [
-                        "view" => "topics.php",
+                        "view" => "listeTopics.php",
                         "data" => [
                             "topics" => $topics,
                         ]
@@ -30,7 +30,7 @@ class ResercheController
                     $sujetmodel = new SujetsManager();
                     $topics = $sujetmodel->findSujetsBymots($reserche);
                     return [
-                        "view" =>"topics.php",
+                        "view" =>"listeTopics.php",
                         "data" => [
                             "topics" => $topics,
                         ]
@@ -53,17 +53,13 @@ class ResercheController
             $usermodel = new SujetsManager();
             $topics = $usermodel->findSujetsByCategorie($categorie);
             return [
-                "view" => "topics.php",
+                "view" => "listeTopics.php",
                 "data" => [
                     "topics" => $topics,
                 ]
         ]; 
         }
-        return [
-            "view" => "home.php", 
-            "data" => null
-        ];
-  
+       
     }
     public function affiche(){
         return false;

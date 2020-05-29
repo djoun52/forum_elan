@@ -46,13 +46,13 @@
                 self::$classname
             );
         }
-        public function addSujets($titre,$user ,$categorie){
+        public function addSujets($titre,$categorie){
          
             $sql = "INSERT INTO Sujets (titre, user_id, categorie_id  ) VALUES (:titre, :user_id, :categorie_id)";
 
             return self::create($sql, [
                     'titre' => $titre,  
-                    'user_id' => $user,  
+                    'user_id' => Session::getUser()->getId(),  
                     'categorie_id' => $categorie
             ]);
         }
@@ -68,7 +68,11 @@
             );
         }
         public function findSujetsByCategorie($categorie){
-            $sql = "SELECT * FROM sujets s INNER JOIN categorie c ON c.id = s.categorie_id WHERE c.nom = :categorie ORDER BY s.datedecreation DESC";    
+            $sql = "SELECT * FROM sujets s 
+                    INNER JOIN categorie c 
+                    ON c.id = s.categorie_id 
+                    WHERE c.nom = :categorie 
+                    ORDER BY s.datedecreation DESC";    
 
             return self::getResults(
                 self::select($sql, ['categorie' =>$categorie], true),

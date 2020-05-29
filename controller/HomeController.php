@@ -22,7 +22,7 @@
             Session::authenticationRequired("ROLE_USER");
 
             return [
-                "view" => "topics.php", 
+                "view" => "listeTopics.php", 
                 "data" => null
             ];
         }
@@ -66,7 +66,7 @@
         
 
             return [
-                "view" => "topics.php", 
+                "view" => "listeTopics.php", 
                 "data" => [
                     "topics" => $topics,
                     
