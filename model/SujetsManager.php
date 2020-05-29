@@ -48,10 +48,7 @@
         }
         public function addSujets($titre,$user ,$categorie){
          
-          
-            
-
-            $sql = "INSERT INTO Sujets (titre, user_id, categorie_id  ) VALUES (:titre, :user_id, :categorie_id;)";
+            $sql = "INSERT INTO Sujets (titre, user_id, categorie_id  ) VALUES (:titre, :user_id, :categorie_id)";
 
             return self::create($sql, [
                     'titre' => $titre,  
@@ -59,6 +56,7 @@
                     'categorie_id' => $categorie
             ]);
         }
+
    
     
         public function findAllSujets(){

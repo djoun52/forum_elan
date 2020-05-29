@@ -36,7 +36,9 @@ class CreateController
                 if (!$model->findOneBytitre($titre)) {
                      $t = Session::getUser();
                      var_dump($titre);
+                     var_dump(Session::getUser()->getId());
                     $model-> addSujets($titre,$t->getId() ,$categorieObj->getId());
+                    
                 }
                 
                   
@@ -44,8 +46,8 @@ class CreateController
             }
         }
             return [
-            "view" => "create.php", 
-            "data" =>  $_SESSION['user']->getId()
+            "view" => "home.php", 
+            "data" => Session::getUser()->getId()
         ];
         }
       
@@ -74,8 +76,8 @@ class CreateController
 
     }
 
-    public function affiche(){
-        return false;
-    }
+    // public function affiche(){
+    //     return false;
+    // }
 
 }
