@@ -19,7 +19,7 @@
 
 
     <?php
-     var_dump($data);
+    //  var_dump($data);
     //  var_dump($data['topics']['0']);
 
 

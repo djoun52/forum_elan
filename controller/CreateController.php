@@ -36,13 +36,13 @@ class CreateController
                 $model = new SujetsManager();
                 if (!$model->findOneBytitre($titre)) {
                      
-                     var_dump($titre);
+                    //  var_dump($titre);
 
                     $model-> addSujets($titre,$categorieObj->getId());
                 }
                 $modelMess= new MessageManager;
                 $sujet= $model->findOneBytitre($titre) ; 
-                var_dump($sujet->getId());
+                // var_dump($sujet->getId());
                 $modelMess->addMessage($message,$sujet->getId());
                   
                     
