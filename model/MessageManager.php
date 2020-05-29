@@ -62,5 +62,8 @@
                 self::$classname
             );
         }
+        public function removeMessage(){
+        
+        }
 
     }

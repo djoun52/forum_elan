@@ -8,7 +8,6 @@ use Model\CategorieManager;
 use Model\MessageManager;
 
 
-
 class CreateController
 {
 
@@ -44,8 +43,9 @@ class CreateController
                 $sujet= $model->findOneBytitre($titre) ; 
                 // var_dump($sujet->getId());
                 $modelMess->addMessage($message,$sujet->getId());
-                  
-                    
+
+                header("Location: ?ctrl=topics&method=listeMessage&topics=$titre");  
+                die(); 
             }
         }
             return [
@@ -65,7 +65,7 @@ class CreateController
             if(!$model->findOneByNom($categorie)){
                 $model->addcategorie($categorie);
 
-                
+                header("Location: ?ctrl=home&method=listCategorie");  
             
             }else {
                 var_dump("la categorie existe deja");
@@ -78,6 +78,10 @@ class CreateController
         
 
     }
+
+    
+
+
 
     public function affiche(){
         return false;

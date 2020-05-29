@@ -22,7 +22,7 @@
             Session::authenticationRequired("ROLE_USER");
 
             return [
-                "view" => "listeTopics.php", 
+                "view" => "topics.php", 
                 "data" => null
             ];
         }
@@ -55,16 +55,10 @@
         public function listTopics(){
 
             Session::authenticationRequired("ROLE_ADMIN");
-            $categoriemodel= new CategorieManager;
+            
             $sujetmodel = new SujetsManager();
-
-            $categorie = $categoriemodel->findAllCategorie();
-            foreach($categorie as $categorie){
-                $topics = $sujetmodel->findAllSujets($categorie->getId());
-                $categorie-> setNom($topics);
-            }
-        
-
+            $topics = $sujetmodel->findAllSujets();
+     
             return [
                 "view" => "listeTopics.php", 
                 "data" => [
@@ -77,15 +71,8 @@
 
             Session::authenticationRequired("ROLE_ADMIN");
             $categoriemodel= new CategorieManager;
-            $sujetmodel = new SujetsManager();
-
-            $sujets = $sujetmodel->findAllSujets();
-            foreach($sujets as $sujets){
-                $categorie = $categoriemodel->findAllCategorie($sujets->getId());
-                $sujets-> setTitre($categorie);
-            }
-        
-
+            $categorie = $categoriemodel->findAllCategorie();
+            
             return [
                 "view" => "categorie.php", 
                 "data" => [

@@ -49,6 +49,11 @@ class TopicsController
 
     }
 
+    public function supMessage(){
+        Session::authenticationRequired("ROLE_USER");
+        
+    }
+
 
 
 

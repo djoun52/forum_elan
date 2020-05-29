@@ -10,7 +10,9 @@
        <li> message poster par <?= $message->getUser()->getPseudo()?> le <?= $message->getDatedecreation("d/m/Y")?>
         à <?= $message->getDatedecreation("H:i:s")?>
         <p> <?= $message->getTexte() ?></p>
+        <a href=""></a>
        </li>
+
        <?php
      }
 ?>
