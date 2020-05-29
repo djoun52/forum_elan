@@ -2,6 +2,7 @@
     namespace Model;
     
     use App\AbstractManager;
+    use App\Session;
 
     class SujetsManager extends AbstractManager
     {
@@ -45,15 +46,20 @@
                 self::$classname
             );
         }
-        public function addSujets($titre, $user_id ,$categorie_id){
-            $sql = "INSERT INTO Sujets (titre, user_id ,  categorie_id  ) VALUES (:titre, :user, :categorie_id;)";
+        public function addSujets($titre,$user ,$categorie){
+         
+          
+            
+
+            $sql = "INSERT INTO Sujets (titre, user_id, categorie_id  ) VALUES (:titre, :user_id, :categorie_id;)";
 
             return self::create($sql, [
-                    'titre' => $titre, 
-                    'user' => $user_id,
-                    'categorie_id' => $categorie_id,
+                    'titre' => $titre,  
+                    'user_id' => $user,  
+                    'categorie_id' => $categorie
             ]);
         }
+   
     
         public function findAllSujets(){
             $sql = "SELECT * FROM Sujets";

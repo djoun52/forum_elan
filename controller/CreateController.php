@@ -5,11 +5,13 @@ use App\Session;
 
 use Model\SujetsManager;
 use Model\CategorieManager;
-use Model\MessageManager;
+
 
 
 class CreateController
 {
+
+
     public function createsujets()
     {
         Session::authenticationRequired("ROLE_USER");
@@ -18,29 +20,34 @@ class CreateController
             $titre = filter_input(INPUT_POST, "titre", FILTER_SANITIZE_STRING);
             $categorie = filter_input(INPUT_POST, "categorie", FILTER_SANITIZE_STRING);
             $message = filter_input(INPUT_POST, "message", FILTER_SANITIZE_STRING);
+      
             if($categorie){
                 $modelCategorie = new CategorieManager();
                     if(!$modelCategorie->findOneByNom($categorie)){
                     $modelCategorie->addcategorie($categorie);
                 
             }
-                $categorieObj=$modelCategorie->findOneByNom($categorie) ;
-            }
-         
-            var_dump($titre);
-            if($titre && $message ){
-                $model = new SujetsManager();
+            $categorieObj= $modelCategorie->findOneByNom($categorie) ;
+            
+           
 
-                  $model-> addSujets($titre,$_SESSION['user']->getId(),$categorieObj->getId());
+            if($titre && $message && $categorie){
+                $model = new SujetsManager();
+                if (!$model->findOneBytitre($titre)) {
+                     $t = Session::getUser();
+                     var_dump($titre);
+                    $model-> addSujets($titre,$t->getId() ,$categorieObj->getId());
+                }
+                
                   
                     
             }
         }
             return [
             "view" => "create.php", 
-            "data" => null
+            "data" =>  $_SESSION['user']->getId()
         ];
-        
+        }
       
     }
 
@@ -56,7 +63,7 @@ class CreateController
                 
             
             }else {
-                var_dump("le sujet existe deja");
+                var_dump("la categorie existe deja");
             }
         }
             return [
