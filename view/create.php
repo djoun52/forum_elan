@@ -13,7 +13,7 @@
 <a href="?ctrl=home&method=reserche">rechercher un topic </a>
 
 <h2>créer un topic  </h2>
-<form action="?ctrl=create&method=createsujets" method="post">
+<form action="?ctrl=create&method=creatTopics" method="post">
 <div class="form-group">
     <label for="titre">titre topic</label>
     <input class="form-control" type="text" name="titre" id="titre" >
@@ -38,7 +38,7 @@
 
 
 
-<form action="?ctrl=create&method=createscategorie" method="post">
+<form action="?ctrl=create&method=createCategorie" method="post">
 
 <div class="form-group">
     <label for="categorie">categorie</label>

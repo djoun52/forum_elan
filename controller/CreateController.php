@@ -12,7 +12,7 @@ class CreateController
 {
 
 
-    public function createsujets()
+    public function creatTopics()
     {
         Session::authenticationRequired("ROLE_USER");
 
@@ -37,7 +37,7 @@ class CreateController
                      
                     //  var_dump($titre);
 
-                    $model-> addSujets($titre,$categorieObj->getId());
+                    $model-> addTopics($titre,$categorieObj->getId());
                 }
                 $modelMess= new MessageManager;
                 $sujet= $model->findOneBytitre($titre) ; 
@@ -58,7 +58,7 @@ class CreateController
 
 
  
-    public function createscategorie() {
+    public function createCategorie() {
         if (!empty($_POST['categorie'])){
             $categorie = filter_input(INPUT_POST, "categorie", FILTER_SANITIZE_STRING);
             $model = new CategorieManager();

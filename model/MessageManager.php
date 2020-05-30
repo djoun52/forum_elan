@@ -30,13 +30,13 @@
             );
         }
 
-        public function addMessage($texte,$sujets_id){
+        public function addMessage($texte,$topics_id){
 
-            $sql = "INSERT INTO Message (texte, sujets_id , user_id) VALUES (:texte , :sujets_id, :user_id)";
+            $sql = "INSERT INTO Message (texte, topics_id , user_id) VALUES (:texte , :topics_id, :user_id)";
 
             return self::create($sql, [
                     'texte' => $texte,
-                    'sujets_id' => $sujets_id,
+                    'topics_id' => $topics_id,
                     'user_id' => Session::getUser()->getId(),
 
             ]);
@@ -52,9 +52,9 @@
         }
         public function findMessageByTopics($topics){
             $sql = "SELECT m.id,m.texte, m.datedecreation,m.sujets_id,m.user_id  FROM message m 
-                INNER JOIN sujets s 
-                ON s.id = m.sujets_id 
-                WHERE s.titre = :topics
+                INNER JOIN topics t 
+                ON t.id = m.sujets_id 
+                WHERE t.titre = :topics
                 ORDER BY m.datedecreation DESC ";
 
             return self::getResults(
@@ -72,7 +72,7 @@
         }
 
         public function countMessageBySujetsId($id){
-            $sql = "SELECT COUNT(sujets_id) FROM `message` WHERE `sujets_id` = :id;";
+            $sql = "SELECT COUNT(topics_id) FROM `message` WHERE `topics_id` = :id;";
 
             return self::getOneOrNullResultInt(
                 self::select($sql, ['id' => $id], false)

@@ -8,7 +8,7 @@
         private $id;
         private $texte;
         private $datedecreation;
-        private $sujets;
+        private $Topics;
         private $user;
 
 
@@ -112,22 +112,23 @@
 
 
 
+
         /**
-         * Get the value of sujets
+         * Get the value of Topics
          */ 
-        public function getSujets()
+        public function getTopics()
         {
-                return $this->sujets;
+                return $this->Topics;
         }
 
         /**
-         * Set the value of sujets
+         * Set the value of Topics
          *
          * @return  self
          */ 
-        public function setSujets($sujets)
+        public function setTopics($Topics)
         {
-                $this->sujets = $sujets;
+                $this->Topics = $Topics;
 
                 return $this;
         }

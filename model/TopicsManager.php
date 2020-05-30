@@ -12,9 +12,9 @@
             self::connect(self::$classname);
         }
 
-        public function findSujetsBymots($mot){
+        public function findTopicsBymots($mot){
           
-            $sql = "SELECT * FROM sujets s WHERE s.titre LIKE :mot ORDER BY s.datedecreation DESC ";
+            $sql = "SELECT * FROM topics t WHERE t.titre LIKE :mot ORDER BY t.datedecreation DESC ";
 
             return self::getResults(
                 self::select($sql, ['mot' => '%'.$mot.'%'] , true),
@@ -23,7 +23,7 @@
         }
 
         public function findOneById($id){
-            $sql = "SELECT * FROM Sujets WHERE id = :id";
+            $sql = "SELECT * FROM topics WHERE id = :id";
 
             return self::getOneOrNullResult(
                 self::select($sql, ['id' => $id], false),
@@ -31,7 +31,7 @@
             );
         }
         public function findOneBytitre($titre){
-            $sql = "SELECT * FROM Sujets WHERE titre = :titre";
+            $sql = "SELECT * FROM topics WHERE titre = :titre";
 
             return self::getOneOrNullResult(
                 self::select($sql, ['titre' => $titre], false),
@@ -39,16 +39,16 @@
             );
         }
         public function findOneidBytitre($titre){
-            $sql = "SELECT id FROM Sujets WHERE titre = :titre";
+            $sql = "SELECT id FROM topics WHERE titre = :titre";
 
             return self::getOneOrNullResult(
                 self::select($sql, ['titre' => $titre], false),
                 self::$classname
             );
         }
-        public function addSujets($titre,$categorie){
+        public function addTopics($titre,$categorie){
          
-            $sql = "INSERT INTO Sujets (titre, user_id, categorie_id  ) VALUES (:titre, :user_id, :categorie_id)";
+            $sql = "INSERT INTO topics (titre, user_id, categorie_id  ) VALUES (:titre, :user_id, :categorie_id)";
 
             return self::create($sql, [
                     'titre' => $titre,  
@@ -59,20 +59,20 @@
 
    
     
-        public function findAllSujets(){
-            $sql = "SELECT * FROM Sujets";
+        public function findAllTopics(){
+            $sql = "SELECT * FROM topics";
 
             return self::getResults(
                 self::select($sql, null, true),
                 self::$classname
             );
         }
-        public function findSujetsByCategorie($categorie){
-            $sql = "SELECT * FROM sujets s 
+        public function findTopicsByCategorie($categorie){
+            $sql = "SELECT * FROM topics t 
                     INNER JOIN categorie c 
-                    ON c.id = s.categorie_id 
+                    ON c.id = t.categorie_id 
                     WHERE c.nom = :categorie 
-                    ORDER BY s.datedecreation DESC";    
+                    ORDER BY t.datedecreation DESC";    
 
             return self::getResults(
                 self::select($sql, ['categorie' =>$categorie], true),
@@ -81,7 +81,7 @@
         }
         public function removeSujet($id){
 
-            $sql = "DELETE FROM `sujets` WHERE id = :id" ;
+            $sql = "DELETE FROM `topics` WHERE id = :id" ;
            
             return self::delete($sql, [ 
                     'id'=>$id 

@@ -18,7 +18,7 @@ class ResercheController
                 case 'categorie':
   
                     $usermodel = new SujetsManager();
-                    $topics = $usermodel->findSujetsByCategorie($reserche);
+                    $topics = $usermodel->findTopicsByCategorie($reserche);
                     return [
                         "view" => "listeTopics.php",
                         "data" => [
@@ -28,7 +28,7 @@ class ResercheController
                     break;
                 case 'mot':
                     $sujetmodel = new SujetsManager();
-                    $topics = $sujetmodel->findSujetsBymots($reserche);
+                    $topics = $sujetmodel->findTopicsBymots($reserche);
                     return [
                         "view" =>"listeTopics.php",
                         "data" => [
@@ -51,7 +51,7 @@ class ResercheController
         if ($_GET['categorie']){
             $categorie = filter_input(INPUT_GET, "categorie", FILTER_SANITIZE_STRING);
             $usermodel = new SujetsManager();
-            $topics = $usermodel->findSujetsByCategorie($categorie);
+            $topics = $usermodel->findTopicsByCategorie($categorie);
             return [
                 "view" => "listeTopics.php",
                 "data" => [
