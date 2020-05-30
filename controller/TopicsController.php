@@ -63,14 +63,14 @@ class TopicsController
         $model->removeMessage($id); 
         $numberMessage=$model->countMessageBySujetsId($idTopic);
         var_dump($numberMessage);
-        $sujetsmodel = new SujetsManager();
+   
         
         if($numberMessage > 0){ 
            
             // header("Location: ?ctrl=topics&method=listeMessage&topics=$titre");  
             die();
         }else{
-            
+            $sujetsmodel = new SujetsManager();
             $sujetsmodel->removeSujet($idTopic);
             header("Location: ?ctrl=home&method=listTopics");
            
