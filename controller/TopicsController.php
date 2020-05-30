@@ -2,7 +2,7 @@
 
 namespace Controller;
 use App\Session;
-use Model\SujetsManager;
+use Model\TopicsManager;
 use Model\MessageManager;
 
 class TopicsController
@@ -13,7 +13,7 @@ class TopicsController
         if ($_GET['topics']){
             $topics = filter_input(INPUT_GET, "topics", FILTER_SANITIZE_STRING);
             $messagemodel = new MessageManager();
-            $sujetsmodel = new SujetsManager();
+            $sujetsmodel = new TopicsManager();
 
             Session::setTopics($sujetsmodel->findOneBytitre($topics));
 
@@ -70,7 +70,7 @@ class TopicsController
             // header("Location: ?ctrl=topics&method=listeMessage&topics=$titre");  
             die();
         }else{
-            $sujetsmodel = new SujetsManager();
+            $sujetsmodel = new TopicsManager();
             $sujetsmodel->removeSujet($idTopic);
             header("Location: ?ctrl=home&method=listTopics");
            

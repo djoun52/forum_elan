@@ -3,7 +3,7 @@
 namespace Controller;
 use App\Session;
 
-use Model\SujetsManager;
+use Model\TopicsManager;
 use Model\CategorieManager;
 use Model\MessageManager;
 
@@ -32,7 +32,7 @@ class CreateController
 
 
             if($titre && $message && $categorie){
-                $model = new SujetsManager();
+                $model = new TopicsManager();
                 if (!$model->findOneBytitre($titre)) {
                      
                     //  var_dump($titre);

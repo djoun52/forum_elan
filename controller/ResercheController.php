@@ -3,7 +3,7 @@
 namespace Controller;
 use App\Session;
 use App\Router;
-use Model\SujetsManager;
+use Model\TopicsManager;
 
 
 class ResercheController
@@ -17,7 +17,7 @@ class ResercheController
             switch ($_POST['type']) {
                 case 'categorie':
   
-                    $usermodel = new SujetsManager();
+                    $usermodel = new TopicsManager();
                     $topics = $usermodel->findTopicsByCategorie($reserche);
                     return [
                         "view" => "listeTopics.php",
@@ -27,7 +27,7 @@ class ResercheController
                     ];
                     break;
                 case 'mot':
-                    $sujetmodel = new SujetsManager();
+                    $sujetmodel = new TopicsManager();
                     $topics = $sujetmodel->findTopicsBymots($reserche);
                     return [
                         "view" =>"listeTopics.php",
@@ -50,7 +50,7 @@ class ResercheController
 
         if ($_GET['categorie']){
             $categorie = filter_input(INPUT_GET, "categorie", FILTER_SANITIZE_STRING);
-            $usermodel = new SujetsManager();
+            $usermodel = new TopicsManager();
             $topics = $usermodel->findTopicsByCategorie($categorie);
             return [
                 "view" => "listeTopics.php",

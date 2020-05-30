@@ -3,7 +3,7 @@
 
     use App\Session;
     use Model\UserManager;
-    use Model\SujetsManager;
+    use Model\TopicsManager;
     use Model\CategorieManager;
 
     class HomeController
@@ -56,7 +56,7 @@
 
             Session::authenticationRequired("ROLE_ADMIN");
             
-            $sujetmodel = new SujetsManager();
+            $sujetmodel = new TopicsManager();
             $topics = $sujetmodel->findAllTopics();
      
             return [

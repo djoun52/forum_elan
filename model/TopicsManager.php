@@ -4,7 +4,7 @@
     use App\AbstractManager;
     use App\Session;
 
-    class SujetsManager extends AbstractManager
+    class TopicsManager extends AbstractManager
     {
         private static $classname = "Model\Sujets"; //C'est le FQCN parce que la classe est dans une string
 
