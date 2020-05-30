@@ -51,9 +51,9 @@
             );
         }
         public function findMessageByTopics($topics){
-            $sql = "SELECT m.id,m.texte, m.datedecreation,m.sujets_id,m.user_id  FROM message m 
+            $sql = "SELECT m.id,m.texte, m.datedecreation,m.topics_id,m.user_id  FROM message m 
                 INNER JOIN topics t 
-                ON t.id = m.sujets_id 
+                ON t.id = m.topics_id
                 WHERE t.titre = :topics
                 ORDER BY m.datedecreation DESC ";
 
@@ -71,7 +71,7 @@
             ]);
         }
 
-        public function countMessageBySujetsId($id){
+        public function countMessageByTopicsId($id){
             $sql = "SELECT COUNT(topics_id) FROM `message` WHERE `topics_id` = :id;";
 
             return self::getOneOrNullResultInt(

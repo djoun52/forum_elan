@@ -13,9 +13,9 @@ class TopicsController
         if ($_GET['topics']){
             $topics = filter_input(INPUT_GET, "topics", FILTER_SANITIZE_STRING);
             $messagemodel = new MessageManager();
-            $sujetsmodel = new TopicsManager();
+            $topicssmodel = new TopicsManager();
 
-            Session::setTopics($sujetsmodel->findOneBytitre($topics));
+            Session::setTopics($topicssmodel->findOneBytitre($topics));
 
             $message = $messagemodel->findMessageByTopics($topics);
 
@@ -56,22 +56,22 @@ class TopicsController
         $model = new MessageManager();
     
         $message= $model->findOneById($id); 
-        $topic=$message->getSujets();
+        $topic=$message->getTopics();
         $idTopic=$topic-> getId();
         $titre=$topic->getTitre();
         // var_dump($model->countMessageBySujetsId($idTopic));
         $model->removeMessage($id); 
-        $numberMessage=$model->countMessageBySujetsId($idTopic);
-        var_dump($numberMessage);
-   
+        $numberMessagearray=$model->countMessageByTopicsId($idTopic);
+
+        $numberMessage=$numberMessagearray['COUNT(topics_id)'];  // modifier getOneOrNullResultInt dans AbstractManager.php
         
-        if($numberMessage > 0){ 
+        if($numberMessage != 0){ 
            
-            // header("Location: ?ctrl=topics&method=listeMessage&topics=$titre");  
+            header("Location: ?ctrl=topics&method=listeMessage&topics=$titre");  
             die();
         }else{
-            $sujetsmodel = new TopicsManager();
-            $sujetsmodel->removeSujet($idTopic);
+            $topicssmodel = new TopicsManager();
+            $topicssmodel->removeTopics($idTopic);
             header("Location: ?ctrl=home&method=listTopics");
            
             die();

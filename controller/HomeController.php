@@ -56,8 +56,8 @@
 
             Session::authenticationRequired("ROLE_ADMIN");
             
-            $sujetmodel = new TopicsManager();
-            $topics = $sujetmodel->findAllTopics();
+            $topicssmodel = new TopicsManager();
+            $topics = $topicssmodel->findAllTopics();
      
             return [
                 "view" => "listeTopics.php", 

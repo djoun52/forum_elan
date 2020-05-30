@@ -6,7 +6,7 @@
 
     class TopicsManager extends AbstractManager
     {
-        private static $classname = "Model\Sujets"; //C'est le FQCN parce que la classe est dans une string
+        private static $classname = "Model\Topics"; //C'est le FQCN parce que la classe est dans une string
 
         public function __construct(){
             self::connect(self::$classname);
@@ -79,7 +79,7 @@
                 self::$classname
             );
         }
-        public function removeSujet($id){
+        public function removeTopics($id){
 
             $sql = "DELETE FROM `topics` WHERE id = :id" ;
            
