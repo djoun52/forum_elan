@@ -53,8 +53,10 @@
             return $stmt->execute($params);
         }
 
-        protected static function update(){
+        protected static function update($sql, $params){
+            $stmt = self::$connection->prepare($sql);
             
+            return $stmt->execute($params);
         }
 
         protected static function delete($sql, $params){

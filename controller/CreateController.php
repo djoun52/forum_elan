@@ -2,7 +2,7 @@
 
 namespace Controller;
 use App\Session;
-
+use App\Router;
 use Model\TopicsManager;
 use Model\CategorieManager;
 use Model\MessageManager;
@@ -38,18 +38,19 @@ class CreateController
                     //  var_dump($titre);
 
                     $model-> addTopics($titre,$categorieObj->getId());
+
                 }
                 $modelMess= new MessageManager;
-                $sujet= $model->findOneBytitre($titre) ; 
+                $topics= $model->findOneBytitre($titre) ; 
                 // var_dump($sujet->getId());
-                $modelMess->addMessage($message,$sujet->getId());
+                $idTopics=$topics->getId();
+                $modelMess->addMessage($message,$idTopics);
+                Router::redirectTo("topics", "listeMessage",$idTopics);
 
-                header("Location: ?ctrl=topics&method=listeMessage&topics=$titre");  
-                die(); 
             }
         }
             return [
-            "view" => "home.php", 
+            "view" => "create.php", 
             "data" => null
         ];
         }
@@ -64,9 +65,8 @@ class CreateController
             $model = new CategorieManager();
             if(!$model->findOneByNom($categorie)){
                 $model->addcategorie($categorie);
-
-                header("Location: ?ctrl=home&method=listCategorie");  
-            
+                Router::redirectTo("home", "listCategorie");
+                
             }else {
                 var_dump("la categorie existe deja");
             }

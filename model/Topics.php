@@ -7,7 +7,8 @@
     {
         private $id;
         private $titre;
-        private $statut;
+        private $resolue;
+        private $cloture;
         private $datedecreation;
         private $user;
         private $categorie;
@@ -56,25 +57,49 @@
                 return $this;
         }
 
+       
         /**
-         * Get the value of statut
+         * Get the value of resolue
          */ 
-        public function getStatut()
+        public function getResolue()
         {
-                return $this->statut;
+                return $this->resolue;
         }
 
         /**
-         * Set the value of statut
+         * Set the value of resolue
          *
          * @return  self
          */ 
-        public function setStatut($statut)
+        public function setResolue($resolue)
         {
-                $this->statut = $statut;
+                $this->resolue = $resolue;
 
                 return $this;
         }
+
+        /**
+         * Get the value of cloture
+         */ 
+        public function getCloture()
+        {
+                return $this->cloture;
+        }
+
+        /**
+         * Set the value of cloture
+         *
+         * @return  self
+         */ 
+        public function setCloture($cloture)
+        {
+                $this->cloture = $cloture;
+
+                return $this;
+        }
+
+
+
         public function getDatedecreation($format)
         {
              return $this->datedecreation->format($format);
@@ -133,4 +158,8 @@
 
 
         
+
+    
+
+      
     }

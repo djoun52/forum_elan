@@ -87,5 +87,22 @@
                     'id'=>$id 
             ]);
         }
+        
 
+
+        public function resolveTopic($id){
+          $sql = "UPDATE topics t SET t.resolue= 1 WHERE t.id= :id " ;
+       
+        return self::update($sql, [ 
+            'id'=>$id 
+        ]);
+        }
+
+        public function EndTopic($id){
+            $sql = "UPDATE topics t SET t.cloture= 1 WHERE t.id= :id " ;
+       
+            return self::update($sql, [ 
+                'id'=>$id 
+            ]);
+        }
     }

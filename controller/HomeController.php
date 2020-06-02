@@ -54,7 +54,7 @@
         }
         public function listTopics(){
 
-            Session::authenticationRequired("ROLE_ADMIN");
+            // Session::authenticationRequired("ROLE_ADMIN");
             
             $topicssmodel = new TopicsManager();
             $topics = $topicssmodel->findAllTopics();

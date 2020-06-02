@@ -18,7 +18,7 @@
                     
                     if(password_verify($password, $user->getPassword())){
                         Session::setUser($user);
-                        Router::redirectTo("home");
+                        Router::redirectTo("home","listTopics");
                     }
                     else var_dump("MOTS DE PASSE POURRIS");
                 }   

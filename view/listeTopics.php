@@ -1,6 +1,3 @@
-
-
-
 <h2>Liste des topics</h2>
 
 
@@ -28,10 +25,24 @@
         foreach ($data['topics'] as $topics) {
     ?>
             <li>
-                <a href="?ctrl=topics&method=listeMessage&topics=<?= $topics->getTitre() ?> "> <?= $topics->getTitre() ?> </a>
-               
+                <a href="?ctrl=topics&method=listeMessage&id=<?= $topics->getId() ?> "> <?= $topics->getTitre() ?> </a>
+
                 créer par <?= $topics->getUser() ?> le <?= $topics->getDatedecreation("d/m/Y") ?>
                 à <?= $topics->getDatedecreation("H:i:s") ?>
+                <?php
+                if (!$topics->getCloture()) {
+                    if ($topics->getResolue()) {
+                    ?>
+                        <p>le sujets est résolut </p>
+                    <?php
+            
+                    }
+                } else {
+                ?>
+                    <p>le sujets est clot </p>
+                <?php
+                }
+                ?>
             </li>
     <?php
         }

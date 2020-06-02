@@ -35,7 +35,7 @@
 
         public static function authenticationRequired($roleToHave){
             if(!self::getUser()){
-                Router::redirectTo("security", "login");
+                Router::redirectTo("home", "listTopics");
             }
         }
     }

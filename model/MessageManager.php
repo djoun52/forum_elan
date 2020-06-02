@@ -50,15 +50,15 @@
                 self::$classname
             );
         }
-        public function findMessageByTopics($topics){
+        public function findMessageByTopicsId($id){
             $sql = "SELECT m.id,m.texte, m.datedecreation,m.topics_id,m.user_id  FROM message m 
                 INNER JOIN topics t 
                 ON t.id = m.topics_id
-                WHERE t.titre = :topics
+                WHERE t.id = :id
                 ORDER BY m.datedecreation DESC ";
 
             return self::getResults(
-                self::select($sql, ['topics' =>$topics], true),
+                self::select($sql, ['id' =>$id], true),
                 self::$classname
             );
         }
