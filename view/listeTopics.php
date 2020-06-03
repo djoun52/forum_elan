@@ -1,37 +1,43 @@
 <h2>Liste des topics</h2>
 
 
-<form action="?ctrl=reserche&method=reserche" method="post">
-    <div class="input-group">
-        <input type="text" class="form-control" placeholder="rechercher topics" name="reserche" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4">
-        <div class="input-group-append" id="button-addon4">
-            <button class="btn btn-outline-primary" type="type" name="type" value="categorie">categorie</button>
-            <button class="btn btn-outline-primary" type="type" name="type" value="mot">mots-clés</button>
-        </div>
-    </div>
-</form>
-<ul>
 
 
-
-
-    <?php
-     var_dump($data);
-    //  var_dump($data['topics']['0']);
-
-
-
-    if ($data['topics']) {
-        foreach ($data['topics'] as $topics) {
-    ?>
-            <li>
-                <a href="?ctrl=topics&method=listeMessage&id=<?= $topics->getId() ?> "> <?= $topics->getTitre() ?> </a>
-
-                créer par <?= $topics->getUser() ?> le <?= $topics->getDatedecreation("d/m/Y") ?>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">titre</th>
+            <th scope="col">créateur</th>
+            <th scope="col">date de création </th>
+            <th scope="col">catégorie </th>
+            <th scope="col">nbmesage  </th>
+            <th scope="col">statue </th>
+        </tr>
+    </thead>
+    <tbody>
+       
+            <?php
+        if ($data['topics']) {
+            foreach ($data['topics'] as $topics) {
+            ?> 
+            <tr>
+            <td><a href="?ctrl=topics&method=listeMessage&id=<?= $topics->getId() ?> "> <?= $topics->getTitre() ?> </a></td>
+            <td>
+                <?= $topics->getUser() ?>
+            </td>
+            <td>
+                <?= $topics->getDatedecreation("d/m/Y") ?>
                 à <?= $topics->getDatedecreation("H:i:s") ?>
-                fait partie de la catégorie <a href="?ctrl=reserche&method=reserchelink&categorie=<?= $topics->getCategorie()->getNom() ?> "><?= $topics->getCategorie()->getNom()?> </a>
-                <?php
-                if (!$topics->getCloture()) {
+            </td>
+            <td>
+                <a href="?ctrl=reserche&method=reserchelink&categorie=<?= $topics->getCategorie()->getNom() ?> "><?= $topics->getCategorie()->getNom()?> </a>
+            </td>
+            <td>
+                <?= $topics-> getNbmessage()?>
+            </td>
+            <td>
+            <?php
+            if (!$topics->getCloture()) {
                     if ($topics->getResolue()) {
                     ?>
                         <p>le sujets est résolut </p>
@@ -44,9 +50,23 @@
                 <?php
                 }
                 ?>
-            </li>
-    <?php
-        }
-    }
-    ?>
-</ul>
+            </td>
+            </tr>
+            <?php }}?>
+        
+        
+        
+            
+      
+        
+      
+        
+        
+        
+     
+       
+        
+        
+    </tbody>
+</table>
+       

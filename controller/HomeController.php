@@ -29,10 +29,13 @@
         public function create(){
 
             Session::authenticationRequired("ROLE_USER");
-
+            $categoriemodel= new CategorieManager;
+            $categorie = $categoriemodel->findAllCategorie();
             return [
                 "view" => "create.php", 
-                "data" => null
+                "data" => [
+                    "categorie" => $categorie,
+                ]
             ];
         }
 
@@ -47,8 +50,7 @@
             return [
                 "view" => "users.php", 
                 "data" => [
-                    "users" => $users,
-                    
+                    "users" => $users,                   
                 ]
             ];
         }
@@ -62,8 +64,7 @@
             return [
                 "view" => "listeTopics.php", 
                 "data" => [
-                    "topics" => $topics,
-                    
+                    "topics" => $topics,                   
                 ]
             ];
         }
@@ -71,13 +72,12 @@
 
             Session::authenticationRequired("ROLE_ADMIN");
             $categoriemodel= new CategorieManager;
-            $categorie = $categoriemodel->findAllCategorie();
+            $categorie = $categoriemodel->findAllCategorieWithCount();
             // $nbTopics=$categoriemodel->countnbtopicsbycategorie();
             return [
                 "view" => "categorie.php", 
                 "data" => [
-                    "categorie" => $categorie,
-                    
+                    "categorie" => $categorie,                 
                 ]
             ];
         }

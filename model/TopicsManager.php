@@ -12,15 +12,7 @@
             self::connect(self::$classname);
         }
 
-        public function findTopicsBymots($mot){
-          
-            $sql = "SELECT t.id,t.titre,t.resolue,t.cloture,t.datedecreation, t.user_id,t.categorie_id FROM topics t WHERE t.titre LIKE :mot ORDER BY t.datedecreation DESC ";
-
-            return self::getResults(
-                self::select($sql, ['mot' => '%'.$mot.'%'] , true),
-                self::$classname
-            );
-        }
+       
 
         public function findOneById($id){
             $sql = "SELECT * FROM topics WHERE id = :id";
@@ -60,18 +52,43 @@
    
     
         public function findAllTopics(){
-            $sql = "SELECT * FROM topics";
+            $sql = "SELECT t.id,t.titre,t.resolue,t.cloture,t.datedecreation,t.user_id,t.categorie_id, COUNT(m.id) AS nbmessage
+                    FROM topics t  
+                    INNER JOIN message m
+                    ON m.topics_id = t.id
+                    WHERE t.id = m.topics_id 
+                    GROUP BY t.id
+                    ORDER BY t.datedecreation DESC";
 
             return self::getResults(
                 self::select($sql, null, true),
                 self::$classname
             );
         }
+        public function findTopicsBymots($mot){
+          
+            $sql = "SELECT t.id,t.titre,t.resolue,t.cloture,t.datedecreation,t.user_id,t.categorie_id, COUNT(m.id) AS nbmessage
+                    FROM topics t  
+                    INNER JOIN message m
+                    ON m.topics_id = t.id
+                    WHERE t.id = m.topics_id AND t.titre LIKE :mot
+                    GROUP BY t.id
+                    ORDER BY t.datedecreation DESC";
+
+            return self::getResults(
+                self::select($sql, ['mot' => '%'.$mot.'%'] , true),
+                self::$classname
+            );
+        }
         public function findTopicsByCategorie($categorie){
-            $sql = "SELECT t.id,t.titre,t.resolue,t.cloture,t.datedecreation, t.user_id,t.categorie_id FROM topics t 
+            $sql = "SELECT t.id,t.titre,t.resolue,t.cloture,t.datedecreation, t.user_id,t.categorie_id, COUNT(m.id) AS nbmessage
+                    FROM topics t 
                     INNER JOIN categorie c 
-                    ON c.id = t.categorie_id 
-                    WHERE c.nom = :categorie
+                    ON c.id = t.categorie_id
+                    INNER JOIN message m
+                    ON m.topics_id = t.id
+                    WHERE c.nom = :categorie and  t.id = m.topics_id
+                    GROUP BY t.id
                     ORDER BY t.datedecreation DESC ";   
 
             return self::getResults(

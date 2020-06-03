@@ -12,6 +12,7 @@
         private $datedecreation;
         private $user;
         private $categorie;
+        private $nbmessage;
 
         public function __construct($data){
             parent::hydrate($data, $this);
@@ -162,4 +163,24 @@
     
 
       
+
+        /**
+         * Get the value of nbmessage
+         */ 
+        public function getNbmessage()
+        {
+                return $this->nbmessage;
+        }
+
+        /**
+         * Set the value of nbmessage
+         *
+         * @return  self
+         */ 
+        public function setNbmessage($nbmessage)
+        {
+                $this->nbmessage = $nbmessage;
+
+                return $this;
+        }
     }

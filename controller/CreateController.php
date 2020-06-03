@@ -21,12 +21,12 @@ class CreateController
             $categorie = filter_input(INPUT_POST, "categorie", FILTER_SANITIZE_STRING);
             $message = filter_input(INPUT_POST, "message", FILTER_SANITIZE_STRING);
       
-            if($categorie){
+            // if($categorie){
                 $modelCategorie = new CategorieManager();
-                    if(!$modelCategorie->findOneByNom($categorie)){
-                    $modelCategorie->addcategorie($categorie);
+            //         if(!$modelCategorie->findOneByNom($categorie)){
+            //         $modelCategorie->addcategorie($categorie);
                 
-            }
+            // }
             $categorieObj= $modelCategorie->findOneByNom($categorie) ;
             
 
@@ -53,7 +53,7 @@ class CreateController
             "view" => "create.php", 
             "data" => null
         ];
-        }
+        
       
     }
 

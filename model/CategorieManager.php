@@ -47,7 +47,7 @@
             ]);
         }
 
-        public function findAllCategorie(){
+        public function findAllCategorieWithCount(){
             $sql = "SELECT c.id, c.nom,COUNT(t.id) AS nbTopics  
             FROM Categorie c 
             INNER JOIN topics t 
@@ -60,14 +60,14 @@
                 self::$classname
             );
         }
-        // public function findAllCategorie(){
-        //     $sql = "SELECT * FROM Categorie";
+        public function findAllCategorie(){
+            $sql = "SELECT * FROM Categorie";
 
-        //     return self::getResults(
-        //         self::select($sql, null, true),
-        //         self::$classname
-        //     );
-        // }
+            return self::getResults(
+                self::select($sql, null, true),
+                self::$classname
+            );
+        }
         public function countnbtopicsbycategorie($id){
             $sql = "SELECT COUNT(topics_id) FROM `message` WHERE `topics_id` = :id;";
 
