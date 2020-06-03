@@ -52,13 +52,20 @@
    
     
         public function findAllTopics(){
-            $sql = "SELECT t.id,t.titre,t.resolue,t.cloture,t.datedecreation,t.user_id,t.categorie_id, COUNT(m.id) AS nbmessage
-                    FROM topics t  
-                    INNER JOIN message m
-                    ON m.topics_id = t.id
-                    WHERE t.id = m.topics_id 
-                    GROUP BY t.id
-                    ORDER BY t.datedecreation DESC";
+            $sql = "SELECT t.id,t.titre,t.resolue,t.cloture,t.datedecreation,t.user_id,t.categorie_id, COUNT(m.id) AS nbmessage,
+            (
+            SELECT m.texte 
+            FROM message m 
+            WHERE t.id = m.topics_id
+            ORDER BY m.datedecreation 
+            DESC LIMIT 1) AS lastMessage
+            
+            
+            FROM topics t
+            INNER JOIN message m
+            ON m.topics_id = t.id
+            GROUP BY t.id
+            ORDER BY t.datedecreation DESC";
 
             return self::getResults(
                 self::select($sql, null, true),

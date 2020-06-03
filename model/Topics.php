@@ -13,6 +13,7 @@
         private $user;
         private $categorie;
         private $nbmessage;
+        private $lastMessage;
 
         public function __construct($data){
             parent::hydrate($data, $this);
@@ -180,6 +181,26 @@
         public function setNbmessage($nbmessage)
         {
                 $this->nbmessage = $nbmessage;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of lastMessage
+         */ 
+        public function getLastMessage()
+        {
+                return $this->lastMessage;
+        }
+
+        /**
+         * Set the value of lastMessage
+         *
+         * @return  self
+         */ 
+        public function setLastMessage($lastMessage)
+        {
+                $this->lastMessage = $lastMessage;
 
                 return $this;
         }

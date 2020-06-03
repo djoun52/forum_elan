@@ -1,8 +1,8 @@
 <h2>Liste des topics</h2>
 
-
-
-
+<?php
+// var_dump($data["topics"]);
+?>
 <table class="table table-hover">
     <thead>
         <tr>
@@ -12,6 +12,7 @@
             <th scope="col">catégorie </th>
             <th scope="col">nbmesage  </th>
             <th scope="col">statue </th>
+            <th scope="col">dernier message poster </th>
         </tr>
     </thead>
     <tbody>
@@ -51,6 +52,10 @@
                 }
                 ?>
             </td>
+            <td>
+                <?= $topics->getLastMessage() ?>
+            </td>
+
             </tr>
             <?php }}?>
         
