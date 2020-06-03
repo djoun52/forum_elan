@@ -7,6 +7,8 @@
     {
         private $id;
         private $nom;
+        private $nbTopics;
+
        
         public function __construct($data){
             parent::hydrate($data, $this);
@@ -56,5 +58,25 @@
         public function __toString(){
                 return $this->nom;
                 ;
+        }
+
+        /**
+         * Get the value of nbTopics
+         */ 
+        public function getNbTopics()
+        {
+                return $this->nbTopics;
+        }
+
+        /**
+         * Set the value of nbTopics
+         *
+         * @return  self
+         */ 
+        public function setNbTopics($nbTopics)
+        {
+                $this->nbTopics = $nbTopics;
+
+                return $this;
         }
     }

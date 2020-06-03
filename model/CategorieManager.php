@@ -48,11 +48,31 @@
         }
 
         public function findAllCategorie(){
-            $sql = "SELECT * FROM Categorie";
+            $sql = "SELECT c.id, c.nom,COUNT(t.id) AS nbTopics  
+            FROM Categorie c 
+            INNER JOIN topics t 
+            ON c.id = t.categorie_id 
+            WHERE c.id = t.categorie_id
+            GROUP BY c.id";
 
             return self::getResults(
                 self::select($sql, null, true),
                 self::$classname
             );
         }
+        // public function findAllCategorie(){
+        //     $sql = "SELECT * FROM Categorie";
+
+        //     return self::getResults(
+        //         self::select($sql, null, true),
+        //         self::$classname
+        //     );
+        // }
+        public function countnbtopicsbycategorie($id){
+            $sql = "SELECT COUNT(topics_id) FROM `message` WHERE `topics_id` = :id;";
+
+            return self::getOneOrNullResultInt(
+                self::select($sql, ['id' => $id], false)
+            );
+        } 
     }

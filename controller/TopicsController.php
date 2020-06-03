@@ -64,7 +64,7 @@ class TopicsController
         $numberMessage=$numberMessagearray['COUNT(topics_id)'];  // modifier getOneOrNullResultInt dans AbstractManager.php
         
         if($numberMessage != 0){ 
-            Router::redirectTo("topics", "listTopics",$idTopic);
+            Router::redirectTo("topics", "listeMessage",$idTopic);
            
         }else{
             $topicssmodel = new TopicsManager();

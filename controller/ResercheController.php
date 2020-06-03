@@ -26,7 +26,7 @@ class ResercheController
                         ]
                     ];
                     break;
-                case 'mot':
+                case 'mot':{}
                     $sujetmodel = new TopicsManager();
                     $topics = $sujetmodel->findTopicsBymots($reserche);
                     return [

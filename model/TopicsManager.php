@@ -14,7 +14,7 @@
 
         public function findTopicsBymots($mot){
           
-            $sql = "SELECT * FROM topics t WHERE t.titre LIKE :mot ORDER BY t.datedecreation DESC ";
+            $sql = "SELECT t.id,t.titre,t.resolue,t.cloture,t.datedecreation, t.user_id,t.categorie_id FROM topics t WHERE t.titre LIKE :mot ORDER BY t.datedecreation DESC ";
 
             return self::getResults(
                 self::select($sql, ['mot' => '%'.$mot.'%'] , true),
@@ -68,11 +68,11 @@
             );
         }
         public function findTopicsByCategorie($categorie){
-            $sql = "SELECT * FROM topics t 
+            $sql = "SELECT t.id,t.titre,t.resolue,t.cloture,t.datedecreation, t.user_id,t.categorie_id FROM topics t 
                     INNER JOIN categorie c 
                     ON c.id = t.categorie_id 
-                    WHERE c.nom = :categorie 
-                    ORDER BY t.datedecreation DESC";    
+                    WHERE c.nom = :categorie
+                    ORDER BY t.datedecreation DESC ";   
 
             return self::getResults(
                 self::select($sql, ['categorie' =>$categorie], true),

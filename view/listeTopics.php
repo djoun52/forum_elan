@@ -16,7 +16,7 @@
 
 
     <?php
-    //  var_dump($data);
+     var_dump($data);
     //  var_dump($data['topics']['0']);
 
 
@@ -29,6 +29,7 @@
 
                 créer par <?= $topics->getUser() ?> le <?= $topics->getDatedecreation("d/m/Y") ?>
                 à <?= $topics->getDatedecreation("H:i:s") ?>
+                fait partie de la catégorie <a href="?ctrl=reserche&method=reserchelink&categorie=<?= $topics->getCategorie()->getNom() ?> "><?= $topics->getCategorie()->getNom()?> </a>
                 <?php
                 if (!$topics->getCloture()) {
                     if ($topics->getResolue()) {

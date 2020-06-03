@@ -10,11 +10,11 @@
 </form>
 
     <?php
-    //  var_dump($data);
+     var_dump($data);
         foreach($data['categorie'] as $categorie){
             ?>
             <li>
-            <a href="?ctrl=reserche&method=reserchelink&categorie=<?= $categorie->getNom()?> "><?= $categorie->getNom()?> </a>
+            <a href="?ctrl=reserche&method=reserchelink&categorie=<?= $categorie->getNom()?> "><?= $categorie->getNom()?> </a> nombre de Topics : <?= $categorie-> getNbTopics()?>
             </li>
             <?php
         }

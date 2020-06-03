@@ -72,7 +72,7 @@
             Session::authenticationRequired("ROLE_ADMIN");
             $categoriemodel= new CategorieManager;
             $categorie = $categoriemodel->findAllCategorie();
-            
+            // $nbTopics=$categoriemodel->countnbtopicsbycategorie();
             return [
                 "view" => "categorie.php", 
                 "data" => [
