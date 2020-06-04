@@ -55,7 +55,7 @@
                 INNER JOIN topics t 
                 ON t.id = m.topics_id
                 WHERE t.id = :id
-                ORDER BY m.datedecreation DESC ";
+                ORDER BY m.datedecreation ASC ";
 
             return self::getResults(
                 self::select($sql, ['id' =>$id], true),

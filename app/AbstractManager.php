@@ -8,7 +8,9 @@
         protected static function connect(){
             self::$connection = DAO::getConnection();
         }
-
+        /**
+         * 
+         */
         protected static function getOneOrNullResult($row, $class){
             
             if($row != null){

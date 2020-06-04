@@ -1,7 +1,7 @@
 <h2>Liste des categorie</h2>
 
 <table class="table table-hover">
-    <thead>
+    <thead class="thead-light">
         <tr>
             <th scope="col">nom catégorie</th>
             <th scope="col">nbtopics </th>

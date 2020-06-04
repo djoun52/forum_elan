@@ -12,6 +12,9 @@
             if(!empty($_POST)){
                 $username = filter_input(INPUT_POST, "username");
                 $password = filter_input(INPUT_POST, "password");
+      
+                
+            
 
                 $model = new UserManager();
                 if($user = $model->findOneByPseudo($username)){
@@ -37,7 +40,8 @@
                 
                 $pseudo = filter_input(INPUT_POST, "pseudo", FILTER_SANITIZE_STRING);
                 $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
-                $pass1 = filter_input(INPUT_POST, "pass1");
+                $pass1 = filter_input(INPUT_POST, "pass1", FILTER_VALIDATE_REGEXP,
+                array("options" => array("regexp" => "/^(?=.{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/")));
                 $pass2 = filter_input(INPUT_POST, "pass2");
 
                 if($pseudo && $email && $pass1 && $pass2){

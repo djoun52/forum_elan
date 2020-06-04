@@ -1,15 +1,4 @@
-<?php
 
-
-?>
-
-
-
-
-
-
-
-<a href="?ctrl=home&method=reserche">rechercher un topic </a>
 
 <h2>créer un topic </h2>
 <form action="?ctrl=create&method=creatTopics" method="post">
@@ -37,7 +26,7 @@
     <textarea class="form-control" name="message" id="message" rows="3"></textarea>
   </div>
 
-
+  <p><input type="hidden" name="csrf_token" value="<?=$csrf_token?>"  ></p>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
@@ -53,6 +42,6 @@
     <label for="categorie">categorie</label>
     <input class="form-control" type="text" name="categorie" id="categorie">
   </div>
-
+  <p><input type="hidden" name="csrf_token" value="<?=$csrf_token?>"  ></p>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

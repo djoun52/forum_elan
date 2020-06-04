@@ -17,8 +17,13 @@
     define('SERVICE_PATH', ROOT_DIR.'app'.DS);
     define('CTRL_PATH', ROOT_DIR.'controller'.DS);
     define('VIEW_PATH', ROOT_DIR.'view'.DS);
-
+    
+    Session::generateKey();
+    $csrf_token=hash_hmac("sha256","this_is_a_secret", Session::getKey());
+    if (Router::CSRFProtection($csrf_token)){
     $result = Router::handleRequest($_GET);
+    }else Router::redirectTo("security","logout");
+
 
     ob_start();
     if(is_array($result) && array_key_exists('view', $result)){

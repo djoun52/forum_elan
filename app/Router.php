@@ -6,7 +6,7 @@
         
         public static function handleRequest($get){
             $ctrlname = "Controller\HomeController";
-            $method = "index";
+            $method = "listTopics";
             
             if(isset($get['ctrl'])){
                 $ctrlname = "Controller\\".ucfirst($get['ctrl'])."Controller";
@@ -27,7 +27,17 @@
             die();
            
         }
-
+        public static function CSRFProtection($token){
+            if(!empty($_POST)){
+                if(isset($_POST["csrf_token"])){
+                    $form_csrf= $_POST['csrf_token'];
+                    if(hash_equals($form_csrf,$token)){
+                        return true;
+                    }
+                
+                } return false;
+            } return true;
+        }
     }
 
     

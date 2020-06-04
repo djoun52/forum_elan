@@ -35,7 +35,15 @@
 
         public static function authenticationRequired($roleToHave){
             if(!self::getUser()){
-                Router::redirectTo("home", "listTopics");
+                Router::redirectTo("security", "login");
             }
+        }
+        public static function generateKey(){
+            if(!isset($_SESSION["key"]) || $_SESSION["key"] === null ){
+                $_SESSION["key"] = bin2hex(random_bytes(32));
+            }
+        } 
+        public static function getKey(){
+            return $_SESSION["key"];
         }
     }

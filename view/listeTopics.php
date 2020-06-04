@@ -4,7 +4,7 @@
 // var_dump($data["topics"]);
 ?>
 <table class="table table-hover">
-    <thead>
+    <thead class="thead-light">
         <tr>
             <th scope="col">titre</th>
             <th scope="col">créateur</th>
