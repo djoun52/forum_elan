@@ -51,7 +51,7 @@
             );
         }
         public function findMessageByTopicsId($id){
-            $sql = "SELECT m.id,m.texte, m.datedecreation,m.topics_id,m.user_id  FROM message m 
+            $sql = "SELECT m.id,m.texte, m.datedecreation,m.topics_id,m.user_id FROM message m 
                 INNER JOIN topics t 
                 ON t.id = m.topics_id
                 WHERE t.id = :id
@@ -72,7 +72,7 @@
         }
 
         public function countMessageByTopicsId($id){
-            $sql = "SELECT COUNT(topics_id) FROM `message` WHERE `topics_id` = :id;";
+            $sql = "SELECT COUNT(topics_id) as nbmessage FROM `message` WHERE `topics_id` = :id;";
 
             return self::getOneOrNullResultInt(
                 self::select($sql, ['id' => $id], false)

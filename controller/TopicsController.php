@@ -59,9 +59,8 @@ class TopicsController
         $topic=$message->getTopics();
         $idTopic=$topic-> getId();
         $model->removeMessage($id); 
-        $numberMessagearray=$model->countMessageByTopicsId($idTopic);
-
-        $numberMessage=$numberMessagearray['COUNT(topics_id)'];  // modifier getOneOrNullResultInt dans AbstractManager.php
+        $numberMessage= $model->countMessageByTopicsId($idTopic);
+        // var_dump($numberMessage);
         
         if($numberMessage != 0){ 
             Router::redirectTo("topics", "listeMessage",$idTopic);

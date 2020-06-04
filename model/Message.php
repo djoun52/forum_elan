@@ -10,6 +10,7 @@
         private $datedecreation;
         private $Topics;
         private $user;
+        private $nbmessage;
 
 
         public function __construct($data){
@@ -129,6 +130,28 @@
         public function setTopics($Topics)
         {
                 $this->Topics = $Topics;
+
+                return $this;
+        }
+
+        
+
+        /**
+         * Get the value of nbmessage
+         */ 
+        public function getNbmessage()
+        {
+                return $this->nbmessage;
+        }
+
+        /**
+         * Set the value of nbmessage
+         *
+         * @return  self
+         */ 
+        public function setNbmessage($nbmessage)
+        {
+                $this->nbmessage = $nbmessage;
 
                 return $this;
         }
