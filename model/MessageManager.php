@@ -72,12 +72,17 @@
         }
 
         public function countMessageByTopicsId($id){
-            $sql = "SELECT COUNT(topics_id) as nbmessage FROM `message` WHERE `topics_id` = :id;";
+            $sql = "SELECT COUNT(topics_id) as nbmessage FROM `message` WHERE `topics_id` = :id";
 
             return self::getOneOrNullResultInt(
                 self::select($sql, ['id' => $id], false)
             );
         } 
 
-
+        public function edithMessage($id,$texte)
+        {
+            $sql = "UPDATE message  SET texte = :texte WHERE  id = :id" ;
+            
+            return self::update($sql, ['id'=>$id,'texte'=>$texte]);{}
+        }
     }

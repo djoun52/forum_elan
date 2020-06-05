@@ -36,21 +36,32 @@
                 self::$classname
             );
         }
-        public function addUser($pseudo, $hash,$email){
-            $sql = "INSERT INTO Users (pseudo, password, email) VALUES (:username, :password, :email)";
+        public function addUser($pseudo, $hash,$secret,$email){
+            $sql = "INSERT INTO Users (pseudo, password,secret, email) VALUES (:username, :password, :secret, :email)";
 
             return self::create($sql, [
                     'username' => $pseudo,
                     'password' => $hash,
+                    'secert' => $secret,
                     'email' => $email,
             ]);
         }
 
         public function findAll(){
-            $sql = "SELECT * FROM Users";
+            $sql = "SELECT * FROM Users ORDER BY datedecreation DESC ";
 
             return self::getResults(
                 self::select($sql, null, true),
+                self::$classname
+            );
+        }
+        
+        public function findUserByCookie($cookie) {
+
+            $sql = "SELECT * FROM Users WHERE secret = :secret";
+    
+            return self::getOneOrNullResult(
+                self::select($sql, ['secret' => $cookie], false),
                 self::$classname
             );
         }

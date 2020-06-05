@@ -8,6 +8,7 @@
         private $id;
         private $pseudo;
         private $password;
+        private $secret;
         private $email;
         private $statut;
         private $datedecreation;
@@ -137,6 +138,27 @@
                 return $this;
         }
 
+
+        /**
+         * Get the value of secret
+         */ 
+        public function getSecret()
+        {
+                return $this->secret;
+        }
+
+        /**
+         * Set the value of secret
+         *
+         * @return  self
+         */ 
+        public function setSecret($secret)
+        {
+                $this->secret = $secret;
+
+                return $this;
+        }
+        
         public function __toString(){
                 return $this->pseudo;
         }

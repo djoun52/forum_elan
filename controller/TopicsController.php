@@ -13,6 +13,13 @@ class TopicsController
         Session::authenticationRequired("ROLE_USER");
         if ($_GET['id']){
             $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING);
+
+           
+            if ($_POST) {
+                $idmessage=filter_input(INPUT_POST, "idmessage", FILTER_SANITIZE_STRING);
+            }else{
+                $idmessage=null;
+            }
             $messagemodel = new MessageManager();
             $topicssmodel = new TopicsManager();
 
@@ -24,8 +31,10 @@ class TopicsController
                 "view" => "topics.php",
                 "data" => [
                     "message" => $message,
+                    "idmessage" =>$idmessage
                 ]
-        ]; 
+             ];
+            
         }
     }
 
@@ -41,7 +50,7 @@ class TopicsController
         return [
             "view" => "topics.php",
             "data" => [
-                "message" => $message,
+                "message" => $message
             ]
         ]; 
     
@@ -52,28 +61,50 @@ class TopicsController
         Session::authenticationRequired("ROLE_USER");
         if ($_GET['id']){
             $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING);
-        // var_dump($id);
-        $model = new MessageManager();
-    
-        $message= $model->findOneById($id); 
-        $topic=$message->getTopics();
-        $idTopic=$topic-> getId();
-        $model->removeMessage($id); 
-        $numberMessage= $model->countMessageByTopicsId($idTopic);
-        // var_dump($numberMessage);
+            // var_dump($id);
+            $model = new MessageManager();
         
-        if($numberMessage != 0){ 
-            Router::redirectTo("topics", "listeMessage",$idTopic);
-           
-        }else{
-            $topicssmodel = new TopicsManager();
-            $topicssmodel->removeTopics($idTopic);
-            Router::redirectTo("home", "listTopics");
-      
-        }
+            $message= $model->findOneById($id); 
+            $topic=$message->getTopics();
+            $idTopic=$topic-> getId();
+            $model->removeMessage($id); 
+            $numberMessage= $model->countMessageByTopicsId($idTopic);
+            // var_dump($numberMessage);
+            
+            if($numberMessage != 0){ 
+                Router::redirectTo("topics", "listeMessage",$idTopic);
+            
+            }else{
+                $topicssmodel = new TopicsManager();
+                $topicssmodel->removeTopics($idTopic);
+                Router::redirectTo("home", "listTopics");
+        
+            }
 
         }
     } 
+    
+
+    public function editMessage(){
+        Session::authenticationRequired("ROLE_USER");
+        if ($_GET['id']){
+            $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING);
+            $model = new MessageManager();
+            if($_POST["message"]){
+                $newmessage=filter_input(INPUT_POST, "idmessage", FILTER_SANITIZE_STRING);
+            
+                $message= $model->findOneById($id); 
+                $model-> edithMessage($id,$newmessage);
+
+
+               
+                $topic=$message->getTopics();
+                $idTopic=$topic-> getId();
+                Router::redirectTo("topics", "listeMessage",$idTopic);
+            }   
+        }
+    }
+    
     public function resolveTopic(){
         Session::authenticationRequired("ROLE_USER");
         if ($_GET['id']){
@@ -82,8 +113,6 @@ class TopicsController
 
             $model ->resolveTopic($id);
             Router::redirectTo("topics", "listeMessage",$id);
-            header("Location: ?ctrl=topics&method=listeMessage&id=$id");  
-            die();
         }
     }
     public function EndTopic(){

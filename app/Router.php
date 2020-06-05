@@ -21,9 +21,9 @@
             return $ctrl->$method();
         }
 
-        public static function redirectTo($ctrl = null, $method = null, $id = null){
+        public static function redirectTo($ctrl = null, $method = null, $id = null ){
 
-            header("Location:?ctrl=".$ctrl."&method=".$method."&id=".$id);
+            header("Location:?ctrl=".$ctrl."&method=".$method."&id=".$id."&idMessage=");
             die();
            
         }

@@ -18,6 +18,11 @@
             selector: '#mytextarea'
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
     <title>forum Elan</title>
 </head>
 

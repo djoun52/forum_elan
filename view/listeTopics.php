@@ -2,8 +2,9 @@
 
 <?php
 // var_dump($data["topics"]);
+// var_dump($_COOKIE)
 ?>
-<table class="table table-hover">
+<table id="example" class="table table-hover">
     <thead class="thead-light">
         <tr>
             <th scope="col">titre</th>
@@ -18,11 +19,12 @@
     <tbody>
        
             <?php
-        if ($data['topics']) {
+            // var_dump($data['topics']);
+            if ($data['topics']) {
             foreach ($data['topics'] as $topics) {
             ?> 
             <tr>
-            <td><a href="?ctrl=topics&method=listeMessage&id=<?= $topics->getId() ?> "> <?= $topics->getTitre() ?> </a></td>
+            <td><a href="?ctrl=topics&method=listeMessage&id=<?= $topics->getId() ?>"> <?= $topics->getTitre() ?> </a></td>
             <td>
                 <?= $topics->getUser() ?>
             </td>

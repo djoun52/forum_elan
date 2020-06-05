@@ -10,15 +10,18 @@
         public function login(){
 
             if(!empty($_POST)){
-                $username = filter_input(INPUT_POST, "username");
+                $username = filter_input(INPUT_POST, "username",);
                 $password = filter_input(INPUT_POST, "password");
       
-                
-            
-
                 $model = new UserManager();
+                
+
                 if($user = $model->findOneByPseudo($username)){
-                    
+                    if($_POST['remember'] == true) {
+                        // J'attribut un cookie
+                        setcookie('auth', $user->getSecret(), time() + 3600*24*7, '/');
+                    }
+                   
                     if(password_verify($password, $user->getPassword())){
                         Session::setUser($user);
                         Router::redirectTo("home","listTopics");
@@ -52,7 +55,8 @@
                         if(!$model->findOneByPseudo($pseudo)){
                             if(!$model->findOneByEmail($email)){
                                 $hash = password_hash($pass1, PASSWORD_ARGON2I);
-                                if($model->addUser($pseudo, $hash,$email)){
+                                $secret = bin2hex(random_bytes(24));
+                                if($model->addUser($pseudo, $hash,$secret,$email)){
                                 Router::redirectTo("security", "login");
                                 }
                             }
@@ -74,8 +78,22 @@
             return false;
         }
 
+        public static function connectWithCookie() {
+            if(isset($_COOKIE['auth']) && !empty($_COOKIE['auth'])) {
+                $model = new UserManager();
+                if($user = $model->findUserByCookie($_COOKIE['auth'])){
+                    Session::setUser($user);
+                }
+            }
+        }
+
+
+
+
+        
         public function logout(){
             Session::removeUser();
+            setcookie('auth', '', time() -1, '/');
             Router::redirectTo("home");
         }
     }
